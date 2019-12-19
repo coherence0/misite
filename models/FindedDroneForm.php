@@ -9,6 +9,7 @@ class FindedDroneForm extends Model
     public $name;
     public $surname;
     public $thirdname;
+    public $dron;
     public $idetificalNumber;
     public $email;
     public $phone;
@@ -20,7 +21,7 @@ class FindedDroneForm extends Model
     public function rules()
     {
         return [
-            [['id','name', 'email', 'surname', 'idetificalNumber', 'phone'], 'required'],
+            [['id','name', 'email', 'surname','dron', 'idetificalNumber', 'phone'], 'required'],
             ['email', 'email'],
             ['number', 'number'],
             [

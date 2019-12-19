@@ -3,9 +3,9 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
-
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+
 ?>
 <div class="container">
   <div class="row">
@@ -19,15 +19,17 @@ use yii\bootstrap4\ActiveForm;
 
                 <?= $FindForm->field($FindedDroneForm, 'name')->label('Имя') ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'surname')->passwordInput()->label('Фамилия') ?>
+                <?= $FindForm->field($FindedDroneForm, 'surname')->label('Фамилия') ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'thirdname')->passwordInput()->label('Отчество') ?>
+                <?= $FindForm->field($FindedDroneForm, 'thirdname')->label('Отчество') ?>
+
+                <?= $FindForm->field($FindedDroneForm, 'dron')->label('Марка потерянного дрона')->dropDownList($items, $params) ?>
 
                 <?= $FindForm->field($FindedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'phone')->passwordInput()->label('Телефон') ?>
+                <?= $FindForm->field($FindedDroneForm, 'phone')->label('Телефон') ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'email')->passwordInput()->label('E-mail')->input('email') ?>
+                <?= $FindForm->field($FindedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
                 <?= $FindForm->field($FindedDroneForm, 'phone')->label('Телефон')?>
 
@@ -58,6 +60,8 @@ use yii\bootstrap4\ActiveForm;
 
                 <?= $LostForm->field($LostedDroneForm, 'thirdname')->passwordInput()->label('Отчество') ?>
 
+                <?= $LostForm->field($LostedDroneForm, 'dron')->label('Марка потерянного дрона')->dropDownList($items, $params) ?>
+
                 <?= $LostForm->field($LostedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
 
                 <?= $LostForm->field($LostedDroneForm, 'phone')->passwordInput()->label('Телефон') ?>
@@ -82,66 +86,156 @@ use yii\bootstrap4\ActiveForm;
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+ymaps.ready(function () {
+    var map;
+    ymaps.geolocation.get().then(function (res) {
+        var mapContainer = $('#mapFind'),
+            bounds = res.geoObjects.get(0).properties.get('boundedBy'),
+            // Рассчитываем видимую область для текущей положения пользователя.
+            mapState = ymaps.util.bounds.getCenterAndZoom(
+                bounds,
+                [mapContainer.width(), mapContainer.height()]
+            );
+        createMap(mapState);
+    }, function (e) {
+        // Если местоположение невозможно получить, то просто создаем карту.
+        createMap({
+            center: [55.751574, 37.573856],
+            zoom: 2
+        });
+    });
+    
+    function createMap (state) {
+        map = new ymaps.Map('mapFind', state);
+        map.events.add('click', function (e) {
+    // Получение координат щелчка
+        var coords = e.get('coords');
+        var x = coords[0];
+        var y = coords[1];
+        map.geoObjects.removeAll();
+        map.geoObjects.add(new ymaps.Placemark([x,y], {
+            balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+        // console.log(coords);
+        // alert(coords.join(', '));
+        });
+    }
+
+
+
+
+});
+
+ymaps.ready(function () {
+    var map;
+    ymaps.geolocation.get().then(function (res) {
+        var mapContainer = $('#mapLost'),
+            bounds = res.geoObjects.get(0).properties.get('boundedBy'),
+            // Рассчитываем видимую область для текущей положения пользователя.
+            mapState = ymaps.util.bounds.getCenterAndZoom(
+                bounds,
+                [mapContainer.width(), mapContainer.height()]
+            );
+        createMap(mapState);
+    }, function (e) {
+        // Если местоположение невозможно получить, то просто создаем карту.
+        createMap({
+            center: [55.751574, 37.573856],
+            zoom: 2
+        });
+    });
+    
+    function createMap (state) {
+        map = new ymaps.Map('mapLost', state);
+
+        map.events.add('click', function (e) {
+    // Получение координат щелчка
+        var coords = e.get('coords');
+        var x = coords[0];
+        var y = coords[1];
+        map.geoObjects.removeAll();
+        map.geoObjects.add(new ymaps.Placemark([x,y], {
+            balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+        // console.log(coords);
+        // alert(coords.join(', '));
+        });
+    }
+
+
+
+});
+
+</script>
+
 <script type="text/javascript">
     // Функция ymaps.ready() будет вызвана, когда
     // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-    ymaps.ready(init);
-    function init(){
+
         // Создание карты.
-        var findMap = new ymaps.Map("mapFind", {
-            // Координаты центра карты.
-            // Порядок по умолчанию: «широта, долгота».
-            // Чтобы не определять координаты центра карты вручную,
-            // воспользуйтесь инструментом Определение координат.
-            center: [55.76, 37.64],
-            // Уровень масштабирования. Допустимые значения:
-            // от 0 (весь мир) до 19.
-            zoom: 7
+        // var findMap = new ymaps.Map("mapFind", {
+        //     // Координаты центра карты.
+        //     // Порядок по умолчанию: «широта, долгота».
+        //     // Чтобы не определять координаты центра карты вручную,
+        //     // воспользуйтесь инструментом Определение координат.
 
-        });
-        var lostMap = new ymaps.Map("mapLost", {
-            // Координаты центра карты.
-            // Порядок по умолчанию: «широта, долгота».
-            // Чтобы не определять координаты центра карты вручную,
-            // воспользуйтесь инструментом Определение координат.
-            center: [55.76, 37.64],
-            // Уровень масштабирования. Допустимые значения:
-            // от 0 (весь мир) до 19.
-            zoom: 7
+        //     var location = ymaps.geolocation.get();
 
-        });
+        //     // Асинхронная обработка ответа.
+        //     location.then(
+        //         function(result) {
+        //         // Добавление местоположения на карту.
+        //         myMap.geoObjects.add(result.geoObjects)
+        //         },
+        //         function(err) {
+        //         console.log('Ошибка: ' + err)
+        //         }
+        //         );
 
-        findMap.events.add('click', function (e) {
-    // Получение координат щелчка
-        var coords = e.get('coords');
-        var x = coords[0];
-        var y = coords[1];
-        findMap.geoObjects.add(new ymaps.Placemark([x,y], {
-            balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
-        }, {
-            preset: 'islands#icon',
-            iconColor: '#0095b6'
-        }))
-        // console.log(coords);
-        // alert(coords.join(', '));
-        });
+        //     center: [55.76, 37.64],
+        //     // Уровень масштабирования. Допустимые значения:
+        //     // от 0 (весь мир) до 19.
+        //     zoom: 7
 
-        lostMap.events.add('click', function (e) {
-    // Получение координат щелчка
-        var coords = e.get('coords');
-        var x = coords[0];
-        var y = coords[1];
-        lostMap.geoObjects.add(new ymaps.Placemark([x,y], {
-            balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
-        }, {
-            preset: 'islands#icon',
-            iconColor: '#0095b6'
-        }))
-        // console.log(coords);
-        // alert(coords.join(', '));
-        });
+        // });
+        // var lostMap = new ymaps.Map("mapLost", {
+        //     // Координаты центра карты.
+        //     // Порядок по умолчанию: «широта, долгота».
+        //     // Чтобы не определять координаты центра карты вручную,
+        //     // воспользуйтесь инструментом Определение координат.
+        //     center: [55.76, 37.64],
+        //     // Уровень масштабирования. Допустимые значения:
+        //     // от 0 (весь мир) до 19.
+        //     zoom: 7
 
-    }
+        //});
+
+
+    //     lostMap.events.add('click', function (e) {
+    // // Получение координат щелчка
+    //     var coords = e.get('coords');
+    //     var x = coords[0];
+    //     var y = coords[1];
+    //     lostMap.geoObjects.removeAll();
+    //     lostMap.geoObjects.add(new ymaps.Placemark([x,y], {
+    //         balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
+    //     }, {
+    //         preset: 'islands#icon',
+    //         iconColor: '#0095b6'
+    //     }))
+    //     // console.log(coords);
+    //     // alert(coords.join(', '));
+    //     });
+
+    //}
 
 </script>
 

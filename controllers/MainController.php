@@ -5,6 +5,8 @@ namespace app\controllers;
 use yii\web\Controller;
 use app\models\FindedDroneForm;
 use app\models\LostedDroneForm;
+use app\models\Drons;
+use yii\helpers\ArrayHelper;
 
 class MainController extends Controller
 {
@@ -12,6 +14,14 @@ class MainController extends Controller
     {
     	$FindedDroneForm = new FindedDroneForm();
         $LostedDroneForm = new LostedDroneForm();
+        $drons = Drons::find()->all();
+
+        $items = ArrayHelper::map($drons, 'id', 'model');
+
+        $params = [
+            'prompt' => 'Укажите ваш дрон'
+        ];
+
 
         // if ($model->load(Yii::$app->request->post()) && $model->validate()) {
         //     // данные в $model удачно проверены
@@ -23,6 +33,16 @@ class MainController extends Controller
         //     // либо страница отображается первый раз, либо есть ошибка в данных
         //     return $this->render('entry', ['model' => $model]);
         // }
-        return $this->render('index', ['FindedDroneForm' => $LostedDroneForm,'LostedDroneForm'=>$FindedDroneForm]);
+
+        $values=[
+
+            'FindedDroneForm' => $LostedDroneForm,
+            'LostedDroneForm' => $FindedDroneForm,
+            'items' => $items,
+            'params' => $params
+
+        ];
+
+        return $this->render('index', $values);
     }
 }
