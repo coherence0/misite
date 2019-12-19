@@ -13,9 +13,9 @@ use yii\bootstrap4\ActiveForm;
       <?php $FindForm = ActiveForm::begin(['id' => 'FindedDroneForm']); 
                 ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'xCoords')->hiddenInput(['value' => '0'])->label(false)?>
+                <?= $FindForm->field($FindedDroneForm, 'xCoords')->hiddenInput(['value' => '0', 'id' => 'findX'],)->label(false)?>
 
-                <?= $FindForm->field($FindedDroneForm, 'yCoords')->hiddenInput(['value' => '0'])->label(false)?>
+                <?= $FindForm->field($FindedDroneForm, 'yCoords')->hiddenInput(['value' => '0', 'id' => 'findY'])->label(false)?>
 
                 <?= $FindForm->field($FindedDroneForm, 'name')->label('Имя') ?>
 
@@ -50,9 +50,9 @@ use yii\bootstrap4\ActiveForm;
         <?php $LostForm = ActiveForm::begin(['id' => 'LostedDroneForm']); 
                 ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'xCoords')->hiddenInput(['value' => '0'])->label(false)?>
+                <?= $LostForm->field($LostedDroneForm, 'xCoords')->hiddenInput(['value' => '0', 'id' => 'lostX'])->label(false)?>
 
-                <?= $LostForm->field($LostedDroneForm, 'yCoords')->hiddenInput(['value' => '0'])->label(false)?>
+                <?= $LostForm->field($LostedDroneForm, 'yCoords')->hiddenInput(['value' => '0', 'id' => 'lostY'])->label(false)?>
 
                 <?= $LostForm->field($LostedDroneForm, 'name')->label('Имя') ?>
 
@@ -114,6 +114,8 @@ ymaps.ready(function () {
         var coords = e.get('coords');
         var x = coords[0];
         var y = coords[1];
+        findX.value = x;
+        findY.value = y;
         map.geoObjects.removeAll();
         map.geoObjects.add(new ymaps.Placemark([x,y], {
             balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
@@ -158,6 +160,8 @@ ymaps.ready(function () {
         var coords = e.get('coords');
         var x = coords[0];
         var y = coords[1];
+        lostX.value = x;
+        lostY.value = y;
         map.geoObjects.removeAll();
         map.geoObjects.add(new ymaps.Placemark([x,y], {
             balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
@@ -165,82 +169,11 @@ ymaps.ready(function () {
             preset: 'islands#icon',
             iconColor: '#0095b6'
         }))
-        // console.log(coords);
-        // alert(coords.join(', '));
         });
     }
 
 
 
 });
-
-</script>
-
-<script type="text/javascript">
-    // Функция ymaps.ready() будет вызвана, когда
-    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-
-        // Создание карты.
-        // var findMap = new ymaps.Map("mapFind", {
-        //     // Координаты центра карты.
-        //     // Порядок по умолчанию: «широта, долгота».
-        //     // Чтобы не определять координаты центра карты вручную,
-        //     // воспользуйтесь инструментом Определение координат.
-
-        //     var location = ymaps.geolocation.get();
-
-        //     // Асинхронная обработка ответа.
-        //     location.then(
-        //         function(result) {
-        //         // Добавление местоположения на карту.
-        //         myMap.geoObjects.add(result.geoObjects)
-        //         },
-        //         function(err) {
-        //         console.log('Ошибка: ' + err)
-        //         }
-        //         );
-
-        //     center: [55.76, 37.64],
-        //     // Уровень масштабирования. Допустимые значения:
-        //     // от 0 (весь мир) до 19.
-        //     zoom: 7
-
-        // });
-        // var lostMap = new ymaps.Map("mapLost", {
-        //     // Координаты центра карты.
-        //     // Порядок по умолчанию: «широта, долгота».
-        //     // Чтобы не определять координаты центра карты вручную,
-        //     // воспользуйтесь инструментом Определение координат.
-        //     center: [55.76, 37.64],
-        //     // Уровень масштабирования. Допустимые значения:
-        //     // от 0 (весь мир) до 19.
-        //     zoom: 7
-
-        //});
-
-
-    //     lostMap.events.add('click', function (e) {
-    // // Получение координат щелчка
-    //     var coords = e.get('coords');
-    //     var x = coords[0];
-    //     var y = coords[1];
-    //     lostMap.geoObjects.removeAll();
-    //     lostMap.geoObjects.add(new ymaps.Placemark([x,y], {
-    //         balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
-    //     }, {
-    //         preset: 'islands#icon',
-    //         iconColor: '#0095b6'
-    //     }))
-    //     // console.log(coords);
-    //     // alert(coords.join(', '));
-    //     });
-
-    //}
-
-</script>
-
-<script type="text/javascript">
-
-    
 
 </script>
