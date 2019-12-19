@@ -5,6 +5,7 @@
 /* @var $model app\models\LoginForm */
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use kartik\date\DatePicker;
 
 ?>
 <div class="container">
@@ -23,7 +24,7 @@ use yii\bootstrap4\ActiveForm;
 
                 <?= $FindForm->field($FindedDroneForm, 'thirdname')->label('Отчество') ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'dron')->label('Марка потерянного дрона')->dropDownList($items, $params) ?>
+                <?= $FindForm->field($FindedDroneForm, 'dron')->label('Марка найденного дрона')->dropDownList($items, $params) ?>
 
                 <?= $FindForm->field($FindedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
 
@@ -38,7 +39,19 @@ use yii\bootstrap4\ActiveForm;
 
                 <?= $FindForm->field($FindedDroneForm, 'verificationcode')->label('Код из смс')?>
 
-                <?= $FindForm->field($FindedDroneForm, 'date')->label('Дата')?>
+                <?= $FindForm->field($FindedDroneForm, 'date')->label('Дата')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Введите дату когды вы нашли дрон'],
+                'value' => '01/29/2014',
+                'language' => 'ru',
+                'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                'pickerIcon' => '<i class="fa fa-calendar-o" aria-hidden="true"></i>',
+                'removeIcon' => '<i class="fa fa-calendar-times-o" aria-hidden="true"></i>',
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'dd/mm/yyyy'
+                ]
+                
+                ]);?>
 
                 <div id="mapFind" style="width: 300px; height: 200px"></div>
 
@@ -56,17 +69,17 @@ use yii\bootstrap4\ActiveForm;
 
                 <?= $LostForm->field($LostedDroneForm, 'name')->label('Имя') ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'surname')->passwordInput()->label('Фамилия') ?>
+                <?= $LostForm->field($LostedDroneForm, 'surname')->label('Фамилия') ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'thirdname')->passwordInput()->label('Отчество') ?>
+                <?= $LostForm->field($LostedDroneForm, 'thirdname')->label('Отчество') ?>
 
                 <?= $LostForm->field($LostedDroneForm, 'dron')->label('Марка потерянного дрона')->dropDownList($items, $params) ?>
 
                 <?= $LostForm->field($LostedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'phone')->passwordInput()->label('Телефон') ?>
+                <?= $LostForm->field($LostedDroneForm, 'phone')->label('Телефон') ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'email')->passwordInput()->label('E-mail')->input('email') ?>
+                <?= $LostForm->field($LostedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
                 <?= $LostForm->field($LostedDroneForm, 'phone')->label('Телефон')?>
 
@@ -75,7 +88,19 @@ use yii\bootstrap4\ActiveForm;
 
                 <?= $LostForm->field($LostedDroneForm, 'verificationcode')->label('Код из смс')?>
 
-                <?= $LostForm->field($LostedDroneForm, 'date')->label('Дата')?>
+                <?= $LostForm->field($LostedDroneForm, 'date')->label('Дата')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Введите дату когды вы потеряли дрон'],
+                'value' => '01/29/2014',
+                'language' => 'ru',
+                'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                'pickerIcon' => '<i class="fa fa-calendar-o" aria-hidden="true"></i>',
+                'removeIcon' => '<i class="fa fa-calendar-times-o" aria-hidden="true"></i>',
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'dd/mm/yyyy'
+                ]
+                
+                ]);?>
 
 
                 <div id="mapLost" style="width: 300px; height: 200px"></div>
