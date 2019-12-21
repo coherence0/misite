@@ -6,11 +6,27 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use kartik\date\DatePicker;
+use yii\widgets\Pjax;
 
 ?>
 <div class="container">
   <div class="row">
     <div class="col">
+        <?php Pjax::begin(); ?>
+
+                <?php if(!empty($status)): ?>
+                    <p><code><?=$status?></code></p>
+                <?php endif; ?>
+
+                <?php $findPhoneForm = ActiveForm::begin(['id' => 'FindedDronePhoneForm', 'options'=>['data-pjax' => true]]);?>
+
+                <?= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
+
+                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+ 
+                <?php ActiveForm::end(); ?>
+                    
+        <?php Pjax::end(); ?>
       <?php $FindForm = ActiveForm::begin(['id' => 'FindedDroneForm']); 
                 ?>
 
@@ -26,20 +42,12 @@ use kartik\date\DatePicker;
 
                 <?= $FindForm->field($FindedDroneForm, 'dron')->label('Марка найденного дрона')->dropDownList($items, $params) ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
+                <?= $FindForm->field($FindedDroneForm, 'idetificalNumber')->label('Идентификационный номер дрона') ?>
+
 
                 <?= $FindForm->field($FindedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
-                <?php $phoneForm = ActiveForm::begin(['id' => 'FindedDroneForm']); 
-                ?>
-
-                <?= $phoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
-
-                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
- 
-                <?php ActiveForm::end(); ?>
-
-                <?= $FindForm->field($FindedDroneForm, 'verificationcode')->label('Код из смс')?>
+                <?= $FindForm->field($FindedDroneForm, 'verificationcode', ['enableAjaxValidation' => true])->label('Код из СМС')?>
 
                 <?= $FindForm->field($FindedDroneForm, 'date')->label('Дата')->widget(DatePicker::classname(), [
                 'options' => ['placeholder' => 'Введите дату когды вы нашли дрон'],
@@ -50,7 +58,7 @@ use kartik\date\DatePicker;
                 'removeIcon' => '<i class="fa fa-calendar-times-o" aria-hidden="true"></i>',
                 'pluginOptions' => [
                     'autoclose'=>true,
-                    'format' => 'dd/mm/yyyy'
+                    'format' => 'dd.mm.yyyy'
                 ]
                 
                 ]);?>
@@ -62,6 +70,23 @@ use kartik\date\DatePicker;
                 <?php ActiveForm::end(); ?>
     </div>
     <div class="col">
+        <?php Pjax::begin(); ?>
+
+                <?php if(!empty($status)): ?>
+                    <p><code><?=$status?></code></p>
+                <?php endif; ?>
+
+                <?php $LostedphoneForm = ActiveForm::begin(['id' => 'LostedDronePhoneForm', 'options'=>['data-pjax' => true]]); 
+                ?>
+
+                <?= $LostedphoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
+
+                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+ 
+                <?php ActiveForm::end(); ?>
+                    
+        <?php Pjax::end(); ?>
+
         <?php $LostForm = ActiveForm::begin(['id' => 'LostedDroneForm']); 
                 ?>
 
@@ -77,20 +102,11 @@ use kartik\date\DatePicker;
 
                 <?= $LostForm->field($LostedDroneForm, 'dron')->label('Марка потерянного дрона')->dropDownList($items, $params) ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
+                <?= $LostForm->field($LostedDroneForm, 'idetificalNumber')->label('Идентификационный номер дрона') ?>
 
                 <?= $LostForm->field($LostedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
-                <?php $phoneForm = ActiveForm::begin(['id' => 'LostedDroneForm']); 
-                ?>
-
-                <?= $phoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
-
-                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
- 
-                <?php ActiveForm::end(); ?>
-
-                <?= $LostForm->field($LostedDroneForm, 'verificationcode')->label('Код из смс')?>
+                <?= $LostForm->field($LostedDroneForm, 'verificationcode',['enableAjaxValidation' => true])->label('Код из СМС')?>
 
                 <?= $LostForm->field($LostedDroneForm, 'date')->label('Дата')->widget(DatePicker::classname(), [
                 'options' => ['placeholder' => 'Введите дату когды вы потеряли дрон'],
@@ -101,7 +117,7 @@ use kartik\date\DatePicker;
                 'removeIcon' => '<i class="fa fa-calendar-times-o" aria-hidden="true"></i>',
                 'pluginOptions' => [
                     'autoclose'=>true,
-                    'format' => 'dd/mm/yyyy'
+                    'format' => 'dd.mm.yyyy'
                 ]
                 
                 ]);?>

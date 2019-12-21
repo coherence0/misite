@@ -6,6 +6,7 @@ use yii\base\Model;
 
 class LostedDroneForm extends Model
 {
+    public $id;
     public $name;
     public $surname;
     public $thirdname;
@@ -29,18 +30,34 @@ class LostedDroneForm extends Model
             ['thirdname', 'default'],
             ['dron','required','message'=>'Необходимо указать марку и модель дрона'],
             ['idetificalNumber', 'required', 'message'=>'Необходимо указать идентификационный номер дрона'],
-            //['phone', 'required', 'message'=>'Необходимо указать телефон'],
+            ['verificationcode', 'required', 'message'=>'Необходимо ввести код из СМС'],
             ['email', 'required', 'message'=>'Введите пожалуйста ваш E-mail'],
+            ['date', 'required', 'message'=>'Укажите пожалуйста дату'],
 
             ['email', 'email'],
-            ['number', 'number'],
             [
                 'date',
                 'date',
-                'format'=>'php:d.m.Y',
-                'timestampAttribute'=>'active_to',
+                'format'=>'php:d.m.Y'
             ],
 
+
+            //['name', 'string', 'length', 'max',=> 15,'message'=>'Имя должно быть не длинее 15 символов'],
+
+            ['name','string','max'=>15,'tooLong'=>'Имя не может быть длинее 15 символов'],
+            ['surname','string','max'=>15,'tooLong'=>'Фамилия не может быть длинее 15 символов'],
+            ['thirdname','string','max'=>15,'tooLong'=>'Отчество не может быть длинее 15 символов'],
+
+            ['thirdname', 'default', 'value'=>'нет'],
+
+            ['verificationcode', 'validateVerificationCode'],
+
         ];
+    }
+    public function validateVerificationCode($attribute, $params){
+        $id = Phones::getIdFromCode($this->$attribute);
+        if ($id == NULL){
+            $this->addError($attribute, 'Неверный код');
+        }
     }
 }
