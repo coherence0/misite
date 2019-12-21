@@ -104,6 +104,7 @@ class MainController extends Controller
                     $phone->save();
                     $FindedDroneForm = new FindedDroneForm();
                     $LostedDroneForm = new LostedDroneForm();
+                    Yii::$app->session->addFlash('success','Дрон добавлен');
                 }    
             }else {
                     $phone = Phones::findOne(Phones::getIdFromCode($FindedDroneForm->verificationcode));
@@ -121,6 +122,7 @@ class MainController extends Controller
                     $phone->varification_code = 0;
                     $phone->status = 1;
                     $phone->save();
+                    Yii::$app->session->addFlash('success','Данные о дроне обновлены');
                     $FindedDroneForm = new FindedDroneForm();
                     $LostedDroneForm = new LostedDroneForm();
             }
@@ -145,6 +147,7 @@ class MainController extends Controller
                         $phone->varification_code = 0;
                         $phone->status = 1;
                         $phone->save();
+                        Yii::$app->session->addFlash('success','Дрон добавлен');
                         $FindedDroneForm = new FindedDroneForm();
                         $LostedDroneForm = new LostedDroneForm();
                     }    
@@ -164,6 +167,7 @@ class MainController extends Controller
                         $phone->varification_code = 0;
                         $phone->status = 1;
                         $phone->save();
+                        Yii::$app->session->addFlash('success','Данные обновленны');
                         $FindedDroneForm = new FindedDroneForm();
                         $LostedDroneForm = new LostedDroneForm();
                     }
