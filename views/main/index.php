@@ -28,14 +28,16 @@ use kartik\date\DatePicker;
 
                 <?= $FindForm->field($FindedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'phone')->label('Телефон') ?>
-
                 <?= $FindForm->field($FindedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
-                <?= $FindForm->field($FindedDroneForm, 'phone')->label('Телефон')?>
+                <?php $phoneForm = ActiveForm::begin(['id' => 'FindedDroneForm']); 
+                ?>
 
-                <?= Html::submitButton('Approve', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= $phoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
 
+                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+ 
+                <?php ActiveForm::end(); ?>
 
                 <?= $FindForm->field($FindedDroneForm, 'verificationcode')->label('Код из смс')?>
 
@@ -77,14 +79,16 @@ use kartik\date\DatePicker;
 
                 <?= $LostForm->field($LostedDroneForm, 'idetificalNumber')->passwordInput()->label('Идентификационный номер дрона') ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'phone')->label('Телефон') ?>
-
                 <?= $LostForm->field($LostedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
-                <?= $LostForm->field($LostedDroneForm, 'phone')->label('Телефон')?>
+                <?php $phoneForm = ActiveForm::begin(['id' => 'LostedDroneForm']); 
+                ?>
 
-                <?= Html::submitButton('Approve', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= $phoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
 
+                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+ 
+                <?php ActiveForm::end(); ?>
 
                 <?= $LostForm->field($LostedDroneForm, 'verificationcode')->label('Код из смс')?>
 

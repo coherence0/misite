@@ -7,6 +7,7 @@ use app\models\FindedDroneForm;
 use app\models\LostedDroneForm;
 use app\models\Drons;
 use yii\helpers\ArrayHelper;
+use app\models\PhoneForm;
 
 class MainController extends Controller
 {
@@ -14,6 +15,7 @@ class MainController extends Controller
     {
     	$FindedDroneForm = new FindedDroneForm();
         $LostedDroneForm = new LostedDroneForm();
+        $PhoneFrom = new PhoneForm();
         $drons = Drons::find()->all();
 
         $items = ArrayHelper::map($drons, 'id', 'model');
@@ -38,6 +40,7 @@ class MainController extends Controller
 
             'FindedDroneForm' => $LostedDroneForm,
             'LostedDroneForm' => $FindedDroneForm,
+            'PhoneForm' => $PhoneFrom,
             'items' => $items,
             'params' => $params
 

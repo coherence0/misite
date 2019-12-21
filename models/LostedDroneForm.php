@@ -12,16 +12,26 @@ class LostedDroneForm extends Model
     public $dron;
     public $idetificalNumber;
     public $email;
-    public $phone;
+    //public $phone;
     public $verificationcode;
     public $date;
     public $xCoords;
     public $yCoords;
 
     public function rules()
-    {
+    {//Sdelat' trim
         return [
-            [['id','name', 'email', 'surname','dron', 'idetificalNumber', 'phone'], 'required'],
+            //[['id', 'email'], 'required'],
+            [['id','name','surname','thirdname','dron','idetificalNumber','email','verificationcode','date','xCoords','yCoords'],'trim'],
+
+            ['name','required','message'=>'Пожалуйста введите Имя'],
+            ['surname','required', 'message'=>'Пожалуйста введите Фамилию'],
+            ['thirdname', 'default'],
+            ['dron','required','message'=>'Необходимо указать марку и модель дрона'],
+            ['idetificalNumber', 'required', 'message'=>'Необходимо указать идентификационный номер дрона'],
+            //['phone', 'required', 'message'=>'Необходимо указать телефон'],
+            ['email', 'required', 'message'=>'Введите пожалуйста ваш E-mail'],
+
             ['email', 'email'],
             ['number', 'number'],
             [
@@ -30,6 +40,7 @@ class LostedDroneForm extends Model
                 'format'=>'php:d.m.Y',
                 'timestampAttribute'=>'active_to',
             ],
+
         ];
     }
 }
