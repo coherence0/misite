@@ -6,9 +6,11 @@ use yii\base\BaseObject;
 use app\models\Pairs;
 use app\models\LostDrons;
 use app\models\FindDrons;
+define('EARTH_RADIUS', 6372795);
 
 class FindeDronsJob extends BaseObject implements \yii\queue\JobInterface
 {
+	
     public $fid;
 
     public function execute($queue)
@@ -18,11 +20,16 @@ class FindeDronsJob extends BaseObject implements \yii\queue\JobInterface
         $losted = FindDrons::find()->all();
         foreach ($losted as $key) {
         	$pair->setIsNewRecord(true);
+        	$lat1 = $finded->x_coords;
+        	$long1 = $finded->y_coords;
+        	$lat2 = $key->x_coords;
+        	$long2 = $key->y_coords;
         	FindeDronsJob::invarDistance($finded->drone_reg_number, $key->drone_reg_number, $out);
         	$pair->id = null;
         	$pair->fid = $this->fid;
         	$pair->lid = $key->id;
         	$pair->match_rate = $out['Similarity'];
+        	$pair->distance = FindeDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
         	$pair->save();
         }
     }
@@ -105,5 +112,33 @@ class FindeDronsJob extends BaseObject implements \yii\queue\JobInterface
     	    "ы"=>"yi","ь"=>"","э"=>"e","ю"=>"yu","я"=>"ya"
     	);
     	return strtr($str,$tr);
+	}
+
+	private static function calculateTheDistance ($xA, $yA, $xB, $yB) {
+ 
+	// перевести координаты в радианы
+	$lat1 = $xA * M_PI / 180;
+	$lat2 = $xB * M_PI / 180;
+	$long1 = $yA * M_PI / 180;
+	$long2 = $yB * M_PI / 180;
+ 
+	// косинусы и синусы широт и разницы долгот
+	$cl1 = cos($lat1);
+	$cl2 = cos($lat2);
+	$sl1 = sin($lat1);
+	$sl2 = sin($lat2);
+	$delta = $long2 - $long1;
+	$cdelta = cos($delta);
+	$sdelta = sin($delta);
+ 
+	// вычисления длины большого круга
+	$y = sqrt(pow($cl2 * $sdelta, 2) + pow($cl1 * $sl2 - $sl1 * $cl2 * $cdelta, 2));
+	$x = $sl1 * $sl2 + $cl1 * $cl2 * $cdelta;
+ 
+	//
+	$ad = atan2($y, $x);
+	$dist = $ad * EARTH_RADIUS;
+ 
+	return $dist;
 	}
 }

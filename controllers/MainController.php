@@ -21,9 +21,9 @@ class MainController extends Controller
 {
     public function actionIndex(){
      $config =[
-        'fid' => '12'
+        'fid' => '3'
         ];
-        Yii::$app->queue->delay(1)->push(new FindeDronsJob($config));
+        Yii::$app->queue->push(new FindeDronsJob($config));
         
     	$FindedDroneForm = new FindedDroneForm();
         $LostedDroneForm = new LostedDroneForm();
