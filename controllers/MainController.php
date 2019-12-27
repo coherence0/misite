@@ -14,11 +14,17 @@ use app\models\FindDrons;
 use app\models\LostDrons;
 use yii\web\Response;
 use yii\bootstrap4\ActiveForm;
+use app\models\FindeDronsJob;
+use app\models\Pairs;
 
 class MainController extends Controller
 {
-    public function actionIndex()
-    {
+    public function actionIndex(){
+     $config =[
+        'fid' => '12'
+        ];
+        Yii::$app->queue->delay(1)->push(new FindeDronsJob($config));
+        
     	$FindedDroneForm = new FindedDroneForm();
         $LostedDroneForm = new LostedDroneForm();
         $PhoneForm = new PhoneForm();
@@ -104,6 +110,10 @@ class MainController extends Controller
                     $phone->save();
                     $FindedDroneForm = new FindedDroneForm();
                     $LostedDroneForm = new LostedDroneForm();
+                    $config =[
+                        'fid' => $findDron->id
+                    ];
+                    Yii::$app->queue->delay(10)->push(new FindeDronsJob($config));
                     Yii::$app->session->addFlash('success','Дрон добавлен');
                 }    
             }else {
@@ -190,6 +200,22 @@ class MainController extends Controller
                 'params' => $params,
             ];
         return $this->render('index', $values);
+    }
+
+    public function actionTest(){
+        $pair = new Pairs();
+        $finded = FindDrons::findOne(12);
+        $losted = FindDrons::find()->all();
+        foreach ($losted as $key) {
+            $pair->setIsNewRecord(true);
+            MainController::invarDistance($finded->drone_reg_number, $key->drone_reg_number, $out);
+            $pair->id = null;
+            $pair->fid = 12;
+            $pair->lid = $key->id;
+            $pair->match_rate = $out['Similarity'];
+            $pair->save();
+        }
+        return $this->render('test',);
     }
 
 }
