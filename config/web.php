@@ -10,6 +10,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@sms' => dirname(dirname(__DIR__)) . '/sms'
     ],
     'components' => [
         'queue' => [
@@ -35,10 +36,21 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'tdlyatesta@yandex.ru',
+                'password' => '1s1a1s1a',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+            
+            
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            //'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -52,6 +64,8 @@ $config = [
         'db' => $db,
         
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'scriptUrl' => 'http://mysite/web/main',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [

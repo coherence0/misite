@@ -2,13 +2,16 @@
 
 namespace app\models;
 
+use Yii;
+use yii\base\Model;
 use yii\base\BaseObject;
 use app\models\Pairs;
 use app\models\LostDrons;
 use app\models\FindDrons;
 define('EARTH_RADIUS', 6372795);
+define('FIND_RADIUS', 5000);
 
-class FindeDronsJob extends BaseObject implements \yii\queue\JobInterface
+class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
 {
 	
     public $fid;
@@ -16,20 +19,45 @@ class FindeDronsJob extends BaseObject implements \yii\queue\JobInterface
     public function execute($queue)
     {
         $pair = new Pairs();
-        $finded = FindDrons::findOne($this->fid);
-        $losted = FindDrons::find()->all();
-        foreach ($losted as $key) {
+        $losted = LostDrons::findOne($this->fid);
+        $finded = FindDrons::find()->all();
+
+        foreach ($finded as $key) {
         	$pair->setIsNewRecord(true);
-        	$lat1 = $finded->x_coords;
-        	$long1 = $finded->y_coords;
+        	$lat1 = $losted->x_coords;
+        	$long1 = $losted->y_coords;
         	$lat2 = $key->x_coords;
         	$long2 = $key->y_coords;
-        	FindeDronsJob::invarDistance($finded->drone_reg_number, $key->drone_reg_number, $out);
+        	LostDronsJob::invarDistance($losted->drone_reg_number, $key->drone_reg_number, $out);
+
+        	if ($out['Similarity'] < 80)
+        		continue; 
+
+        	if ($out['Similarity'] == 100){
+        		//отправляем письма
+
+        		Yii::$app->mailer->compose()
+                	    ->setTo($losted->email)
+                    	->setFrom(["tdlyatesta@yandex.ru"=>'ya'])
+                    	->setSubject('Ваш дрон найден!')
+                    	->setTextBody("Его нашел ".$key->name)
+                    	->send();
+
+        	}elseif($out['Similarity'] > 80 && LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) {
+        		//отправляем письма
+        		Yii::$app->mailer->compose()
+                	    ->setTo($losted->email)
+                    	->setFrom(["tdlyatesta@yandex.ru"=>'ya'])
+                    	->setSubject('Возможно ваш дрон найден!')
+                    	->setTextBody("Его нашел ".$key->name)
+                    	->send();	
+        	}
+
         	$pair->id = null;
-        	$pair->fid = $this->fid;
-        	$pair->lid = $key->id;
+        	$pair->lid = $this->fid;
+        	$pair->fid = $key->id;
         	$pair->match_rate = $out['Similarity'];
-        	$pair->distance = FindeDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
+        	$pair->distance = LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
         	$pair->save();
         }
     }
@@ -39,10 +67,10 @@ class FindeDronsJob extends BaseObject implements \yii\queue\JobInterface
 		$hs2 = array();
 		$out = array();
 
-		$query = FindeDronsJob::translitIt($query);
+		$query = LostDronsJob::translitIt($query);
 		$query  = strtolower($query);
 		$query = substr($query, 0, 255);
-		$rowV1 = FindeDronsJob::translitIt($rowV1);
+		$rowV1 = LostDronsJob::translitIt($rowV1);
 		$rowV1  = strtolower($rowV1);
 		$rowV1 = substr($rowV1, 0, 255);
 

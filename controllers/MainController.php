@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers;  
 
 use Yii;
 use yii\web\Controller;
@@ -14,17 +14,23 @@ use app\models\FindDrons;
 use app\models\LostDrons;
 use yii\web\Response;
 use yii\bootstrap4\ActiveForm;
-use app\models\FindeDronsJob;
+use app\models\FindDronsJob;
+use app\models\LostDronsJob;
+use app\models\SendSmsJob;
 use app\models\Pairs;
 
 class MainController extends Controller
 {
     public function actionIndex(){
-     $config =[
-        'fid' => '3'
-        ];
-        Yii::$app->queue->push(new FindeDronsJob($config));
-        
+        // $config =[
+        //     'phone' => '22811377',
+        //     //'phoneObj' => null
+        // ];
+        // Yii::$app->queue->push(new SendSmsJob($config));
+        // $config =[
+        //    'fid' => '4'
+        // ];
+        // Yii::$app->queue->push(new LostDronsJob($config));                                  
     	$FindedDroneForm = new FindedDroneForm();
         $LostedDroneForm = new LostedDroneForm();
         $PhoneForm = new PhoneForm();
@@ -48,30 +54,27 @@ class MainController extends Controller
 
         if(Yii::$app->request->isPjax){
             if ($PhoneForm->load(Yii::$app->request->post()) && $PhoneForm->validate()){
-                if(!Phones::findPhone($PhoneForm->phone)){
-                    $phone = new Phones();
-
-                    $phone->uid = 0;
-                    $phone->phone = $PhoneForm->phone;
-                    $phone->varification_code = mt_rand(1000,9999);
-                    $phone->created_at = time();
-                    $phone->status = 0;
-                    $phone->save();
+                $phone = Phones::findOne(Phones::getIdFromPhone($PhoneForm->phone));
+                if(!$phone){
+                    $config =[
+                        'phone' => $PhoneForm->phone,
+                    ];
+                    Yii::$app->queue->push(new SendSmsJob($config));
                     //delete($phone);
                     $status = 'Сообщение отправленно';  
                 }else {
                     $time = time();
-                    $phone = Phones::findOne(Phones::getIdFromPhone($PhoneForm->phone));
                     $phone->created_at += 60;
                     if ($time > $phone->created_at){
-                        $phone->created_at = time();
-                        $phone->save();
+                        $config =[
+                        'phone' => $PhoneForm->phone,
+                        ];
+                        Yii::$app->queue->push(new SendSmsJob($config));
                         $status = 'Сообщение отправленно';
                     }else {
                         $status = "Подождите " . ($phone->created_at - $time) . " секунд";
                     }
-                }
-                
+                }    
             } else {
                 $status = 'Вы неверно ввели номер';
             }
@@ -97,6 +100,7 @@ class MainController extends Controller
                     $findDron->name = $FindedDroneForm->name;
                     $findDron->surname = $FindedDroneForm->surname;
                     $findDron->thirdname = $FindedDroneForm->thirdname;
+                    $findDron->email = $FindedDroneForm->email;
                     $findDron->drone_id = $FindedDroneForm->dron;
                     $findDron->drone_reg_number = $FindedDroneForm->idetificalNumber;
                     $findDron->date = $FindedDroneForm->date;
@@ -113,7 +117,7 @@ class MainController extends Controller
                     $config =[
                         'fid' => $findDron->id
                     ];
-                    Yii::$app->queue->delay(10)->push(new FindeDronsJob($config));
+                    Yii::$app->queue->push(new FindDronsJob($config));
                     Yii::$app->session->addFlash('success','Дрон добавлен');
                 }    
             }else {
@@ -122,6 +126,7 @@ class MainController extends Controller
                     $findDron->name = $FindedDroneForm->name;
                     $findDron->surname = $FindedDroneForm->surname;
                     $findDron->thirdname = $FindedDroneForm->thirdname;
+                    $findDron->email = $FindedDroneForm->email;
                     $findDron->drone_id = $FindedDroneForm->dron;
                     $findDron->date = $FindedDroneForm->date;
                     $findDron->x_coords = $FindedDroneForm->xCoords;
@@ -146,6 +151,7 @@ class MainController extends Controller
                         $lostDron->name = $LostedDroneForm->name;
                         $lostDron->surname = $LostedDroneForm->surname;
                         $lostDron->thirdname = $LostedDroneForm->thirdname;
+                        $lostDron->email = $LostedDroneForm->email;
                         $lostDron->drone_id = $LostedDroneForm->dron;
                         $lostDron->drone_reg_number = $LostedDroneForm->idetificalNumber;
                         $lostDron->date = $LostedDroneForm->date;
@@ -157,6 +163,10 @@ class MainController extends Controller
                         $phone->varification_code = 0;
                         $phone->status = 1;
                         $phone->save();
+                        $config =[
+                        'fid' => $lostDron->id
+                        ];
+                        Yii::$app->queue->push(new LostDronsJob($config));
                         Yii::$app->session->addFlash('success','Дрон добавлен');
                         $FindedDroneForm = new FindedDroneForm();
                         $LostedDroneForm = new LostedDroneForm();
@@ -167,6 +177,7 @@ class MainController extends Controller
                         $lostDron->name = $LostedDroneForm->name;
                         $lostDron->surname = $LostedDroneForm->surname;
                         $lostDron->thirdname = $LostedDroneForm->thirdname;
+                        $lostDron->email = $LostedDroneForm->email;
                         $lostDron->drone_id = $LostedDroneForm->dron;
                         $lostDron->date = $LostedDroneForm->date;
                         $lostDron->x_coords = $LostedDroneForm->xCoords;

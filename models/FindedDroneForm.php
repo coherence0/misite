@@ -54,6 +54,8 @@ class FindedDroneForm extends Model
 
             ['verificationcode', 'validateVerificationCode'],
 
+            ['idetificalNumber','match','pattern' => '/[a-z]{1}[0-9]{6}|[0-9]{1}[a-z]{1}[0-9]{5}|[0-9]{2}[a-z]{1}[0-9]{4}|[0-9]{3}[a-z]{1}[0-9]{3}|[0-9]{4}[a-z]{1}[0-9]{2}|[0-9]{5}[a-z]{1}[0-9]{1}|[0-9]{6}[a-z]{1}/i','message'=>'Неправильно введен номер дрона']
+
         ];
     }
 
