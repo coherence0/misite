@@ -43,7 +43,7 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
 
         	}elseif($out['Similarity'] > 80 && FindDrons::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) {
         		Yii::$app->mailer->compose()
-                	    ->setTo('desogat489@wmail2.net')
+                	    ->setTo($key->email)
                     	->setFrom(["tdlyatesta@yandex.ru"=>'ya'])
                     	->setSubject('Возможно ваш дрон найден!')
                     	->setTextBody("Его нашел ".$finded->name)

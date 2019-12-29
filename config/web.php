@@ -12,6 +12,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@sms' => dirname(dirname(__DIR__)) . '/sms'
     ],
+    'defaultRoute' => 'main/index',
     'components' => [
         'queue' => [
             'class' => \yii\queue\db\Queue::class,
@@ -36,7 +37,7 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => false,
+            'useFileTransport' => true,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',

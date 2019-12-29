@@ -35,7 +35,7 @@ class FindedDroneForm extends Model
             ['date', 'required', 'message'=>'Укажите пожалуйста дату'],
             ['email', 'required', 'message'=>'Введите пожалуйста ваш E-mail'],
 
-            ['email', 'email'],
+            ['email', 'email','message'=>'Введите корректный E-mail'],
             [
                 'date',
                 'date',
@@ -53,9 +53,11 @@ class FindedDroneForm extends Model
             ['thirdname', 'default', 'value'=>'нет'],
 
             ['verificationcode', 'validateVerificationCode'],
+            //['verificationcode','match','pattern'=>'/[0-9]{5}/','message'=>'Неверный код'],
 
             ['idetificalNumber','match','pattern' => '/[a-z]{1}[0-9]{6}|[0-9]{1}[a-z]{1}[0-9]{5}|[0-9]{2}[a-z]{1}[0-9]{4}|[0-9]{3}[a-z]{1}[0-9]{3}|[0-9]{4}[a-z]{1}[0-9]{2}|[0-9]{5}[a-z]{1}[0-9]{1}|[0-9]{6}[a-z]{1}/i','message'=>'Неправильно введен номер дрона'],
-
+            ['xCoords', 'double'],
+            ['yCoords', 'double']
 
         ];
     }

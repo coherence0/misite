@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\Url;
 use app\models\FindedDroneForm;
 use app\models\LostedDroneForm;
 use app\models\Drons;
@@ -119,6 +120,7 @@ class MainController extends Controller
                     ];
                     Yii::$app->queue->push(new FindDronsJob($config));
                     Yii::$app->session->addFlash('success','Дрон добавлен');
+                    return $this->goHome();
                 }    
             }else {
                     $phone = Phones::findOne(Phones::getIdFromCode($FindedDroneForm->verificationcode));
@@ -138,8 +140,7 @@ class MainController extends Controller
                     $phone->status = 1;
                     $phone->save();
                     Yii::$app->session->addFlash('success','Данные о дроне обновлены');
-                    $FindedDroneForm = new FindedDroneForm();
-                    $LostedDroneForm = new LostedDroneForm();
+                    return $this->goHome();
             }
         } elseif ($LostedDroneForm->load(Yii::$app->request->post()) && $LostedDroneForm->validate()){
                     $id = LostDrons::getIdFromDronRegNumber($LostedDroneForm->idetificalNumber);
@@ -168,8 +169,7 @@ class MainController extends Controller
                         ];
                         Yii::$app->queue->push(new LostDronsJob($config));
                         Yii::$app->session->addFlash('success','Дрон добавлен');
-                        $FindedDroneForm = new FindedDroneForm();
-                        $LostedDroneForm = new LostedDroneForm();
+                        return $this->goHome();
                     }    
                 }else {
                         $phone = Phones::findOne(Phones::getIdFromCode($LostedDroneForm->verificationcode));
@@ -189,8 +189,7 @@ class MainController extends Controller
                         $phone->status = 1;
                         $phone->save();
                         Yii::$app->session->addFlash('success','Данные обновленны');
-                        $FindedDroneForm = new FindedDroneForm();
-                        $LostedDroneForm = new LostedDroneForm();
+                        return $this->goHome();
                     }
                 }else {
                     $values=[
