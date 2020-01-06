@@ -23,7 +23,9 @@
         "kartik-v/yii2-widget-datepicker": "@dev",
         "2amigos/yii2-date-picker-widget": "~1.0",
         "yarcode/yii2-queue-mailer": "^1.0",
-        "shaqman/yii2-queue-mailer": "^0.3.0"
+        "shaqman/yii2-queue-mailer": "^0.3.0",
+        "almasaeed2010/adminlte": "~3.0",
+        "kartik-v/yii2-widgets": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

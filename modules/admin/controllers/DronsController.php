@@ -17,6 +17,7 @@ class DronsController extends Controller
     /**
      * {@inheritdoc}
      */
+    public $layout = 'admin';
     public function behaviors()
     {
         return [
@@ -50,12 +51,12 @@ class DronsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+    // public function actionView($id)
+    // {
+    //     return $this->renderAjax('view', [
+    //         'model' => $this->findModel($id),
+    //     ]);
+    // }
 
     /**
      * Creates a new Drons model.
@@ -68,11 +69,18 @@ class DronsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        }else {
+            if (Yii::$app->request->isAjax){
+                return $this->renderAjax('_form', [
+                    'model' => $model,
+                ]); 
+            }else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]); 
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -88,11 +96,19 @@ class DronsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            if (Yii::$app->request->isAjax){
+                return $this->renderAjax('_form', [
+                    'model' => $model,
+                ]); 
+            }else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]); 
+            }
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        
     }
 
     /**
