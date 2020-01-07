@@ -57,7 +57,7 @@ class AuthController extends Controller
         $model = new LoginForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-        return Yii::$app->response->redirect(Url::to('/web/admin'));
+        return Yii::$app->response->redirect(Url::to('/web/admin/drons'));
             return $this->goBack();
         }
 

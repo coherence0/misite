@@ -19,7 +19,7 @@ AdminAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head> 
     <!-- <script src="https://kit.fontawesome.com/5228d07c66.js" crossorigin="anonymous"></script> -->
-    
+
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,7 +40,7 @@ AdminAsset::register($this);
             <div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
                 <div class="user-logo">
                     <div class="img" style="background-image: url(images/logo.jpg);"></div>
-                    <h3>Catriona Henderson</h3>
+                    <h3>Админ панель</h3>
                 </div>
             </div>
         <ul class="list-unstyled components mb-5">
