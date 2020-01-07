@@ -1,0 +1,54 @@
+.box{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.box__item{
+    display: flex;
+    flex-direction: column;
+    color:white;
+    font-size: 45px;
+}
+h1 {
+    font-size: 60px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    transition: transform 0.3s ease-in;
+}
+
+.img-container--left {
+    transform: translateX(-100%);
+}
+
+.img-container--right {
+    transform: translateX(100%);
+}
+
+.img-one {
+    left: 0;
+    background: url('/images/find_dron.jpg') no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.img-two {
+    right: 0;
+    background: url('/images/lost_dron.jpg') no-repeat 100% 50%;
+    background-size: cover;
+}
+img {
+    display: block;
+    width: 100%;
+}
+

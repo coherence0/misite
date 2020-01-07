@@ -46,9 +46,18 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-
-        <?= $content ?>
+    <div class="box">
+        <div class="img-container img-one">
+            <div class="box__item">
+                <label id="find">Нашел дрона</label>
+            </div>
+        </div>
+        <div class="img-container img-two">
+            <div class="box__item">
+                <label>Потерял дрона</label>
+            </div>
+        </div>
+<!--        --><?//= $content ?>
     </div>
 </div>
 
