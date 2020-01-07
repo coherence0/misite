@@ -58,7 +58,7 @@ use yii\widgets\Pjax;
                 'removeIcon' => '<i class="fa fa-calendar-times-o" aria-hidden="true"></i>',
                 'pluginOptions' => [
                     'autoclose'=>true,
-                    'format' => 'dd.mm.yyyy'
+                    'format' => 'yyyy-mm-dd'
                 ]
                 
                 ]);?>
@@ -117,7 +117,7 @@ use yii\widgets\Pjax;
                 'removeIcon' => '<i class="fa fa-calendar-times-o" aria-hidden="true"></i>',
                 'pluginOptions' => [
                     'autoclose'=>true,
-                    'format' => 'dd.mm.yyyy'
+                    'format' => 'yyyy-mm-dd'
                 ]
                 
                 ]);?>

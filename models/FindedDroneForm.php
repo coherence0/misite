@@ -39,7 +39,7 @@ class FindedDroneForm extends Model
             [
                 'date',
                 'date',
-                'format'=>'php:d.m.Y',
+                'format'=>'php:Y-m-d',
             ],
 
 
