@@ -61,6 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>$model['email'],
                 'label'=>'Email'
             ],
+
+            [
+                //'attribute' => 'email',
+                'value'=>$model['phones']['phone'],
+                'label'=>'Телефон'
+            ],
             //'drone_id',
             [
                 //'attribute' => 'drone_id',

@@ -41,7 +41,7 @@ class FindDronsSearch extends FindDrons
     public function search($params)
     {
         // var_dump($query)
-        $query = FindDrons::find()->joinWith(['drons']);
+        $query = FindDrons::find()->joinWith(['drons','phones']);
         //var_dump($query);die;
 
         // add conditions that should always apply here

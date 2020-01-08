@@ -68,13 +68,17 @@ class FindDrons extends \yii\db\ActiveRecord
         return $this->hasOne(Drons::className(), ['id' => 'drone_id']);
     }
     
+    public function getPhones(){
+        return $this->hasOne(Phones::className(), ['uid' => 'id']);
+    }
+
     public static function getIdFromDronRegNumber($DronRegNumber){
 		return FindDrons::find()->where(['drone_reg_number'=>$DronRegNumber])->one()['id'];
 	}
 
     public static function getOneWithDrone($id){
 
-        $users = FindDrons::find()->where(['`find_drons`.`id`'=> $id])->with('drons')->one();
+        $users = FindDrons::find()->where(['`find_drons`.`id`'=> $id])->joinWith(['drons','phones'])->one();
                     
         // $users = FindDrons::find()
         //         ->where(['`find_drons`.`id`'=> $id])
