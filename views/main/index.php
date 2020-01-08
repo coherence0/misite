@@ -11,10 +11,19 @@ use yii\widgets\Pjax;
 ?>
 <div class="box">
     <div class="img-container img-one" id="find">
-        <label>Нашел дрона</label>
+        <div class="img-container__item red">
+            <h2>Я нашел<br> дрон</h2>
+            <p>Кликните на дрон и заполните форму, и мы отправим ваши данные владельцу дрона!</p>
+            <div class="img-container__item--image"></div>
+        </div>
+
     </div>
     <div class="img-container img-two" id="lost">
-        <label>Потерял дрона</label>
+        <div class="img-container__item blue">
+            <h2>Я потерял<br>  дрон</h2>
+            <p>Кликните на дрон и заполните форму, и мы отправим вам данные человека нашедшего ваш дрона!</p>
+            <div class="img-container__item--image"></div>
+        </div>
     </div>
     <div class="img-container form">
         <div class="box__item hidden" id="find_form">
