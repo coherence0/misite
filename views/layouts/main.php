@@ -1,10 +1,8 @@
 <?php
 
-use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-use yii\bootstrap4\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -25,8 +23,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="wrap">
+<header>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
@@ -45,14 +42,9 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
+</header>
+<div class="wrap">
         <?= $content ?>
-    </div>
 </div>
 
 <footer class="footer">
