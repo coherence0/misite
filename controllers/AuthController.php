@@ -48,7 +48,7 @@ class AuthController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin()
+    public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -57,7 +57,7 @@ class AuthController extends Controller
         $model = new LoginForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-        return Yii::$app->response->redirect(Url::to('/web/admin/drons'));
+        return Yii::$app->response->redirect(Url::to('/admin/drons'));
             return $this->goBack();
         }
 

@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Drons;
-use app\models\DronsSearch;
+use app\models\FindDrons;
+use app\models\FindDronsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DronsController implements the CRUD actions for Drons model.
+ * FindController implements the CRUD actions for FindDrons model.
  */
-class DronsController extends Controller
+class FindController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,59 +31,54 @@ class DronsController extends Controller
     }
 
     /**
-     * Lists all Drons models.
+     * Lists all FindDrons models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DronsSearch();
+        $searchModel = new FindDronsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        //var_dump($searchModel);die;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }    
+    }
+
     /**
-     * Displays a single Drons model.
+     * Displays a single FindDrons model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+        //var_dump($this->findModel($id));die;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Drons model.
+     * Creates a new FindDrons model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Drons();
+        $model = new FindDrons();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        }else {
-            if (Yii::$app->request->isAjax){
-                return $this->renderAjax('_form', [
-                    'model' => $model,
-                ]); 
-            }else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]); 
-            }
         }
 
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Drons model.
+     * Updates an existing FindDrons model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,23 +90,15 @@ class DronsController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            if (Yii::$app->request->isAjax){
-                return $this->renderAjax('_form', [
-                    'model' => $model,
-                ]); 
-            }else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]); 
-            }
         }
 
-        
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Drons model.
+     * Deletes an existing FindDrons model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -125,15 +112,17 @@ class DronsController extends Controller
     }
 
     /**
-     * Finds the Drons model based on its primary key value.
+     * Finds the FindDrons model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Drons the loaded model
+     * @return FindDrons the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Drons::findOne($id)) !== null) {
+        //var_dump(FindDrons::getOneWithDrone($id));die;
+        if (($model = FindDrons::getOneWithDrone($id)) !== null) {
+            //var_dump($model['0']['drons']['model']);die;
             return $model;
         }
 

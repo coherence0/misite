@@ -44,14 +44,21 @@ AdminAsset::register($this);
                 </div>
             </div>
         <ul class="list-unstyled components mb-5">
-          <li class="active">
-            <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+          <!-- class="active" -->
+          <li>
+            <a href="/admin/drons"><span class="fas fa-plane"></span> Drons</a>
           </li>
           <li>
+            <a href="/admin/find"><span class="fas fa-users"></span> Find Drons</a>
+          </li>
+          <?= Html::beginForm(['/auth/logout'], 'post')
+                            . Html::submitButton(
+                                'Logout ',
+                                ['class' => 'btn btn-link logout', 'style'=>"padding-top:10px;"]
+                            )
+                            . Html::endForm() ?>
+          <!-- <li>
               <a href="#"><span class="fa fa-download mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Download</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-gift mr-3"></span> Gift Code</a>
           </li>
           <li>
             <a href="#"><span class="fa fa-trophy mr-3"></span> Top Review</a>
@@ -64,7 +71,7 @@ AdminAsset::register($this);
           </li>
           <li>
             <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
-          </li>
+          </li> -->
         </ul>
 
         </nav>
@@ -75,9 +82,6 @@ AdminAsset::register($this);
       </div>
         </div>
 
-    <div class="container">
-        <?= $content ?>
-    </div>
 </div>
 
 <footer class="footer">

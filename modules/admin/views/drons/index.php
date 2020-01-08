@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::button('Create Drons', ['value'=>Url::to('/web/admin/drons/create'), 'class' => 'btn btn-success', 'id'=>'modalButton']) ?>
+        <?= Html::button('Create Drons', ['value'=>Url::to('/admin/drons/create'), 'class' => 'btn btn-success', 'id'=>'modalButton']) ?>
     </p>
 
     <?php
@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn',
              'header'=>'Действиe',
-             'headerOptions' => ['width' => '30'],
+             'headerOptions' => ['width' => '30','align'=>'center'],
              'template' => '{delete}',
              'buttons' => [
             // 'view' => function ($url, $model) {
@@ -122,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
             var modalHtml = "";
             modalHtml = $("#editingDrone").html();
             $('#editingDrone').modal('show');
-            $('#editingDrone').find('.modal-body').load('/web/admin/drons/update?id=' + data.key); 
+            $('#editingDrone').find('.modal-body').load('/admin/drons/update?id=' + data.key); 
             $('#editingDrone').on('hidden.bs.modal', function (e) {
             //$('#editingDrone').find("input,textarea,select").val('').end();
                 $('#editingDrone').html(modalHtml); 

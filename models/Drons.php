@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\FindDrons;
 
 /**
  * This is the model class for table "drons".
@@ -41,4 +42,8 @@ class Drons extends \yii\db\ActiveRecord
             'model' => 'Model',
         ];
     }
+
+    // public function getFindDrons(){
+    //     return $this->hasOne(FindDrons::className(), ['dron_id' => 'id']);
+    // }
 }
