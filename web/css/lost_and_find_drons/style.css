@@ -67,6 +67,7 @@ h1 {
 
 }
 .img-container__item p{
+    width: 80%;
     font-size: 20px;
     text-align: center;
 }
