@@ -27,14 +27,18 @@ h1 {
     height: 100%;
     overflow-y: scroll;
     transition: transform 0.3s ease-in;
+    color: white;
+    font-size: 2.75em;
 }
 
 .img-container--left {
-    transform: translateX(-100%);
+    filter: blur(5px);
+    transform: translateX(-50%);
 }
 
 .img-container--right {
-    transform: translateX(100%);
+    filter: blur(5px);
+    transform: translateX(50%);
 }
 
 .img-one {
@@ -60,4 +64,6 @@ img {
 .box__button {
     width: 100%;
 }
-
+.hidden{
+    display: none;
+}

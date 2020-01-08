@@ -25,7 +25,8 @@ class AppAsset extends AssetBundle
         'css/lost_and_find_drons/style.css'
     ];
     public $js = [
-        'js/maps.js'
+        'js/maps.js',
+        'js/lost_and_find_drons/scripts.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
