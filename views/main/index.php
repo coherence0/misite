@@ -9,26 +9,24 @@ use kartik\date\DatePicker;
 use yii\widgets\Pjax;
 
 ?>
-<div class="container">
-  <div class="row">
-    <div class="col">
-        <?php Pjax::begin(); ?>
-
-                <?php if(!empty($status)): ?>
-                    <p><code><?=$status?></code></p>
-                <?php endif; ?>
-
-                <?php $findPhoneForm = ActiveForm::begin(['id' => 'FindedDronePhoneForm', 'options'=>['data-pjax' => true]]);?>
-
-                <?= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
-
-                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
- 
-                <?php ActiveForm::end(); ?>
-                    
-        <?php Pjax::end(); ?>
-      <?php $FindForm = ActiveForm::begin(['id' => 'FindedDroneForm']); 
-                ?>
+<div class="box">
+    <div class="img-container img-one">
+<!--        --><?php //Pjax::begin(); ?>
+<!---->
+<!--                --><?php //if(!empty($status)): ?>
+<!--                    <p><code>--><?//=$status?><!--</code></p>-->
+<!--                --><?php //endif; ?>
+<!---->
+<!--                --><?php //$findPhoneForm = ActiveForm::begin(['id' => 'FindedDronePhoneForm', 'options'=>['data-pjax' => true]]);?>
+<!---->
+<!--                --><?//= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
+<!---->
+<!--                --><?//= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+<!-- -->
+<!--                --><?php //ActiveForm::end(); ?>
+<!--                    -->
+<!--        --><?php //Pjax::end(); ?>
+      <?php $FindForm = ActiveForm::begin(['id' => 'FindedDroneForm']); ?>
 
                 <?= $FindForm->field($FindedDroneForm, 'xCoords')->hiddenInput(['value' => '0', 'id' => 'findX'],)->label(false)?>
 
@@ -63,32 +61,30 @@ use yii\widgets\Pjax;
                 
                 ]);?>
 
-                <div id="mapFind" style="width: 300px; height: 200px"></div>
+                <div id="mapFind"></div>
 
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary box__button', 'name' => 'login-button']) ?>
  
                 <?php ActiveForm::end(); ?>
     </div>
-    <div class="col">
-        <?php Pjax::begin(); ?>
+    <div class="img-container img-two">
+<!--        --><?php //Pjax::begin(); ?>
+<!---->
+<!--                --><?php //if(!empty($status)): ?>
+<!--                    <p><code>--><?//=$status?><!--</code></p>-->
+<!--                --><?php //endif; ?>
+<!---->
+<!--                --><?php //$LostedphoneForm = ActiveForm::begin(['id' => 'LostedDronePhoneForm', 'options'=>['data-pjax' => true]]); ?>
+<!---->
+<!--                --><?//= $LostedphoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
+<!---->
+<!--                --><?//= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+<!-- -->
+<!--                --><?php //ActiveForm::end(); ?>
+<!--                    -->
+<!--        --><?php //Pjax::end(); ?>
 
-                <?php if(!empty($status)): ?>
-                    <p><code><?=$status?></code></p>
-                <?php endif; ?>
-
-                <?php $LostedphoneForm = ActiveForm::begin(['id' => 'LostedDronePhoneForm', 'options'=>['data-pjax' => true]]); 
-                ?>
-
-                <?= $LostedphoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
-
-                <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
- 
-                <?php ActiveForm::end(); ?>
-                    
-        <?php Pjax::end(); ?>
-
-        <?php $LostForm = ActiveForm::begin(['id' => 'LostedDroneForm']); 
-                ?>
+        <?php $LostForm = ActiveForm::begin(['id' => 'LostedDroneForm']); ?>
 
                 <?= $LostForm->field($LostedDroneForm, 'xCoords')->hiddenInput(['value' => '0', 'id' => 'lostX'])->label(false)?>
 
@@ -123,12 +119,11 @@ use yii\widgets\Pjax;
                 ]);?>
 
 
-                <div id="mapLost" style="width: 300px; height: 200px"></div>
+                <div id="mapLost"></div>
 
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
  
                 <?php ActiveForm::end(); ?>
     </div>
-  </div>
 </div>
 

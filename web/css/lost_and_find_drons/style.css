@@ -25,6 +25,7 @@ h1 {
     top: 0;
     width: 50%;
     height: 100%;
+    overflow-y: scroll;
     transition: transform 0.3s ease-in;
 }
 
@@ -49,6 +50,14 @@ h1 {
 }
 img {
     display: block;
+    width: 100%;
+}
+#mapLost, #mapFind{
+    width: 300px;
+    height: 200px;
+    margin-bottom: 1rem;
+}
+.box__button {
     width: 100%;
 }
 
