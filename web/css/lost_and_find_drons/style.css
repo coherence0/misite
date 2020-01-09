@@ -9,6 +9,8 @@
     position: relative;
     width: 100%;
     height: 100%;
+    color: white;
+    background-color: #007bff;
     /*overflow: hidden;*/
 }
 .box__item{
@@ -96,10 +98,23 @@ h1 {
 .red{
     color: #ff0266;
 }
+.red__bg{
+    color: white;
+    background-color: #ff0266;
+}
+.yellow{
+    color: #ffde03;
+}
+.yellow__bg{
+    color: white;
+    background-color: #ffde03;
+}
 .blue{
     color: #0336ff;
 }
-
+.dark-blue{
+    background-color: #0336ff;
+}
 .img-container__item--image{
     height: 40%;
     width: 80%;
@@ -133,9 +148,12 @@ img {
     display: none;
 }
 .form{
-    color:black;
+    color:white;
     font-size: 16px;
 }
 .nav-bar{
     z-index: 4;
+}
+.message{
+    color: white;
 }

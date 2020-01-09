@@ -29,7 +29,7 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-dark bg-primary navbar-expand-lg nav-bar'
+            'class' => 'navbar-dark navbar-expand-lg nav-bar dark-blue'
         ],
     ]);
     echo Nav::widget([
