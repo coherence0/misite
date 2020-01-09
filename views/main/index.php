@@ -144,7 +144,7 @@ use yii\widgets\Pjax;
             <din class="box__item__footer">
                 <div id="mapLost"></div>
 
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary box__button', 'name' => 'login-button']) ?>
             </din>
             <?php ActiveForm::end(); ?>
         </div>

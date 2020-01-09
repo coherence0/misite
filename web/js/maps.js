@@ -10,6 +10,8 @@ ymaps.ready(function () {
             );
         createMap(mapState);
     }, function (e) {
+        console.log(1);
+        console.error(e);
         // Если местоположение невозможно получить, то просто создаем карту.
         createMap({
             center: [55.751574, 37.573856],
@@ -52,6 +54,8 @@ ymaps.ready(function () {
             );
         createMap(mapState);
     }, function (e) {
+        console.log(2);
+        console.error(e);
         // Если местоположение невозможно получить, то просто создаем карту.
         createMap({
             center: [55.751574, 37.573856],
