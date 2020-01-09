@@ -37,10 +37,18 @@ class FindDrons extends \yii\db\ActiveRecord
         return [
             [['name', 'surname', 'thirdname', 'email', 'drone_id', 'drone_reg_number', 'date', 'x_coords', 'y_coords', 'created_at'], 'required'],
             [['drone_id'], 'integer'],
-            [['date'], 'safe'],
-            [['name', 'surname', 'thirdname', 'x_coords', 'y_coords', 'created_at'], 'string', 'max' => 30],
+            [
+                'date',
+                'date',
+                'format'=>'php:Y-m-d',
+            ],
+            ['thirdname', 'default', 'value'=>'нет'],
+            [['name', 'surname', 'thirdname'], 'string', 'max' => 30],
             [['email'], 'string', 'max' => 255],
             [['drone_reg_number'], 'string', 'max' => 7],
+            ['x_coords', 'double'],
+            ['y_coords', 'double']
+
         ];
     }
 

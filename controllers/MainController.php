@@ -113,8 +113,7 @@ class MainController extends Controller
                     $phone->varification_code = 0;
                     $phone->status = 1;
                     $phone->save();
-                    $FindedDroneForm = new FindedDroneForm();
-                    $LostedDroneForm = new LostedDroneForm();
+                    var_dump($findDron);die;
                     $config =[
                         'fid' => $findDron->id
                     ];
