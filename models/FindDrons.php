@@ -35,17 +35,35 @@ class FindDrons extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'surname', 'thirdname', 'email', 'drone_id', 'drone_reg_number', 'date', 'x_coords', 'y_coords', 'created_at'], 'required'],
-            [['drone_id'], 'integer'],
+            [['id','name','surname','thirdname','drone_id','drone_reg_number','email','date','x_coords','y_coords'],'trim'],
+
+            ['name','required','message'=>'Пожалуйста введите Имя'],
+            ['surname','required', 'message'=>'Пожалуйста введите Фамилию'],
+            ['thirdname', 'default'],
+            ['drone_id','required','message'=>'Необходимо указать марку и модель дрона'],
+            ['drone_reg_number', 'required', 'message'=>'Необходимо указать идентификационный номер дрона'],
+            ['email', 'required', 'message'=>'Введите пожалуйста ваш E-mail'],
+            ['date', 'required', 'message'=>'Укажите пожалуйста дату'],
+
+            ['email', 'email','message'=>'Введите корректный E-mail'],
             [
                 'date',
                 'date',
                 'format'=>'php:Y-m-d',
             ],
+
+
+            //['name', 'string', 'length', 'max',=> 15,'message'=>'Имя должно быть не длинее 15 символов'],
+
+            ['name','string','max'=>15,'tooLong'=>'Имя не может быть длинее 15 символов'],
+            ['surname','string','max'=>15,'tooLong'=>'Фамилия не может быть длинее 15 символов'],
+            ['thirdname','string','max'=>15,'tooLong'=>'Отчество не может быть длинее 15 символов'],
+
             ['thirdname', 'default', 'value'=>'нет'],
-            [['name', 'surname', 'thirdname'], 'string', 'max' => 30],
-            [['email'], 'string', 'max' => 255],
-            [['drone_reg_number'], 'string', 'max' => 7],
+
+            //['verificationcode','match','pattern'=>'/[0-9]{5}/','message'=>'Неверный код'],
+
+            ['drone_reg_number','match','pattern' => '/[a-z]{1}[0-9]{6}|[0-9]{1}[a-z]{1}[0-9]{5}|[0-9]{2}[a-z]{1}[0-9]{4}|[0-9]{3}[a-z]{1}[0-9]{3}|[0-9]{4}[a-z]{1}[0-9]{2}|[0-9]{5}[a-z]{1}[0-9]{1}|[0-9]{6}[a-z]{1}/i','message'=>'Неправильно введен номер дрона'],
             ['x_coords', 'double'],
             ['y_coords', 'double']
 
