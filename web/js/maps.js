@@ -36,6 +36,7 @@ ymaps.ready(function () {
         // console.log(coords);
         // alert(coords.join(', '));
         });
+        fitMapToViewport();
     }
 });
 
@@ -57,10 +58,9 @@ ymaps.ready(function () {
             zoom: 2
         });
     });
-    
+
     function createMap (state) {
         map = new ymaps.Map('mapLost', state);
-
         map.events.add('click', function (e) {
     // Получение координат щелчка
         var coords = e.get('coords');
@@ -76,5 +76,6 @@ ymaps.ready(function () {
             iconColor: '#0095b6'
         }))
         });
+        fitMapToViewport()
     }
 });
