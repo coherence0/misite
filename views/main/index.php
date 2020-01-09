@@ -45,7 +45,10 @@ use yii\widgets\Pjax;
 
             <?php Pjax::end(); ?>
 
-            <?php $FindForm = ActiveForm::begin(['options' => ['id' => 'findedDroneForm']]); ?>
+            <?php $FindForm = ActiveForm::begin([
+                'options' => ['id' => 'findedDroneForm'],
+                'fieldConfig' => ['options' => ['class' => 'form__field']],
+            ]); ?>
 
             <?= $FindForm->field($FindedDroneForm, 'xCoords')->hiddenInput(['value' => '0', 'id' => 'findX'],)->label(false) ?>
 
@@ -101,7 +104,10 @@ use yii\widgets\Pjax;
             <?php ActiveForm::end(); ?>
 
             <?php Pjax::end(); ?>
-            <?php $LostForm = ActiveForm::begin(['options' => ['id' => 'lostedDroneForm']]); ?>
+            <?php $LostForm = ActiveForm::begin([
+                'options' => ['id' => 'lostedDroneForm'],
+                'fieldConfig' => ['options' => ['class' => 'form__field']],
+            ]); ?>
 
             <?= $LostForm->field($LostedDroneForm, 'xCoords')->hiddenInput(['value' => '0', 'id' => 'lostX'])->label(false) ?>
 

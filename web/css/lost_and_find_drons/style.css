@@ -113,6 +113,9 @@ h1 {
     background: url('/images/losted_dron.png') no-repeat 50% 50%;
     background-size: contain;
 }
+.form__field{
+    padding: 5px;
+}
 img {
     display: block;
     width: 100%;
