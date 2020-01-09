@@ -23,13 +23,13 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 3vh;
     position: absolute;
     width: 50%;
     height: 100%;
     z-index: 1;
     transition: transform 0.3s ease-in;
     color: white;
-    font-size: 2.75em;
 }
 
 .img-container--left {
@@ -54,10 +54,18 @@ h1 {
     background-color: #ffde03;
 }
 
+@media (width: 1600px) {
+    #find{
+        padding-left: 50px;
+    }
+    #lost{
+        padding-right: 50px;
+    }
+}
 .img-container__item{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: white;
     margin: 35px;
@@ -67,13 +75,14 @@ h1 {
 
 }
 .img-container__item p{
-    font-size: 20px;
+    width: 80%;
+    font-size: 1em;
     text-align: center;
 }
 .img-container__item h2{
     margin-top: 38px;
     margin-bottom: 20px;
-    font-size: 45px;
+    font-size: 2rem;
     text-align: center;
 }
 .red{
@@ -84,11 +93,17 @@ h1 {
 }
 
 .img-container__item--image{
-    margin: 32px 15px;
     height: 40%;
     width: 80%;
-    background: url('/images/lost_dron.jpg') no-repeat 100% 50%;
-    background-size: cover;
+
+}
+.img-container__item--image.find{
+    background: url('/images/finded_dron.png') no-repeat 50% 50%;
+    background-size: contain;
+}
+.img-container__item--image.lost{
+    background: url('/images/losted_dron.png') no-repeat 50% 50%;
+    background-size: contain;
 }
 img {
     display: block;
