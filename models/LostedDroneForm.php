@@ -38,7 +38,7 @@ class LostedDroneForm extends Model
             [
                 'date',
                 'date',
-                'format'=>'php:d.m.Y'
+                'format'=>'php:Y-m-d',
             ],
 
 
@@ -53,7 +53,9 @@ class LostedDroneForm extends Model
             ['verificationcode', 'validateVerificationCode'],
             //['verificationcode','match','pattern'=>'/[0-9]{5}/','message'=>'Неверный код'],
 
-            ['idetificalNumber','match','pattern' => '/[a-z]{1}[0-9]{6}|[0-9]{1}[a-z]{1}[0-9]{5}|[0-9]{2}[a-z]{1}[0-9]{4}|[0-9]{3}[a-z]{1}[0-9]{3}|[0-9]{4}[a-z]{1}[0-9]{2}|[0-9]{5}[a-z]{1}[0-9]{1}|[0-9]{6}[a-z]{1}/i','message'=>'Неправильно введен номер дрона']
+            ['idetificalNumber','match','pattern' => '/[a-z]{1}[0-9]{6}|[0-9]{1}[a-z]{1}[0-9]{5}|[0-9]{2}[a-z]{1}[0-9]{4}|[0-9]{3}[a-z]{1}[0-9]{3}|[0-9]{4}[a-z]{1}[0-9]{2}|[0-9]{5}[a-z]{1}[0-9]{1}|[0-9]{6}[a-z]{1}/i','message'=>'Неправильно введен номер дрона'],
+            ['xCoords', 'double'],
+            ['yCoords', 'double']
 
         ];
     }
