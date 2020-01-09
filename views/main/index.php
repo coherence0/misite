@@ -16,7 +16,9 @@ use yii\widgets\Pjax;
         <div class="img-container__item red">
             <h2>Я нашел<br> дрон</h2>
             <p>Кликните на дрон и заполните форму, и мы отправим ваши данные владельцу дрона!</p>
-            <div class="img-container__item--image find"></div>
+            <div class="animated">
+                <div class="img-container__item--image find"></div>
+            </div>
         </div>
 
     </div>
@@ -24,7 +26,9 @@ use yii\widgets\Pjax;
         <div class="img-container__item blue">
             <h2>Я потерял<br> дрон</h2>
             <p>Кликните на дрон и заполните форму, и мы отправим вам данные человека нашедшего ваш дрона!</p>
-            <div class="img-container__item--image lost"></div>
+            <div class="animated">
+                <div class="img-container__item--image lost"></div>
+            </div>
         </div>
     </div>
     <div class="img-container form">
