@@ -32,14 +32,14 @@ use yii\widgets\Pjax;
             <?php Pjax::begin(); ?>
 
             <?php if (!empty($status)): ?>
-                <p><code><?= $status ?></code></p>
+                <p><code class="message"><?= $status ?></code></p>
             <?php endif; ?>
 
             <?php $findPhoneForm = ActiveForm::begin(['id' => 'findedDronePhoneForm', 'options' => ['data-pjax' => true]]); ?>
 
             <?= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон') ?>
 
-            <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+            <?= Html::submitButton('Подтвердить', ['class' => 'btn red__bg', 'name' => 'approve-button']) ?>
 
             <?php ActiveForm::end(); ?>
 
@@ -62,7 +62,7 @@ use yii\widgets\Pjax;
 
             <?= $FindForm->field($FindedDroneForm, 'dron')->label('Марка найденного дрона')->dropDownList($items, $params) ?>
 
-            <?= $FindForm->field($FindedDroneForm, 'idetificalNumber')->label('Идентификационный номер дрона') ?>
+            <?= $FindForm->field($FindedDroneForm, 'idetificalNumber')->label('Учетный номер дрона') ?>
 
 
             <?= $FindForm->field($FindedDroneForm, 'email')->label('E-mail')->input('email') ?>
@@ -85,21 +85,21 @@ use yii\widgets\Pjax;
         <div class="box__item__footer">
             <div id="mapFind"></div>
 
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary box__button', 'name' => 'login-button']) ?>
+            <?= Html::submitButton('Login', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
         </div>
             <?php ActiveForm::end(); ?>
         </div>
         <div class="box__item hidden" id="lost_form">
             <?php Pjax::begin(); ?>
             <?php if (!empty($status)): ?>
-                <p><code><?= $status ?></code></p>
+                <p><code class="message"><?= $status ?></code></p>
             <?php endif; ?>
 
             <?php $LostedphoneForm = ActiveForm::begin(['id' => 'lostedDronePhoneForm', 'options' => ['data-pjax' => true]]); ?>
 
             <?= $LostedphoneForm->field($PhoneForm, 'phone')->label('Телефон') ?>
 
-            <?= Html::submitButton('Подтвердить', ['class' => 'btn btn-primary', 'name' => 'approve-button']) ?>
+            <?= Html::submitButton('Подтвердить', ['class' => 'btn yellow__bg', 'name' => 'approve-button']) ?>
 
             <?php ActiveForm::end(); ?>
 
@@ -121,7 +121,7 @@ use yii\widgets\Pjax;
 
             <?= $LostForm->field($LostedDroneForm, 'dron')->label('Марка потерянного дрона')->dropDownList($items, $params) ?>
 
-            <?= $LostForm->field($LostedDroneForm, 'idetificalNumber')->label('Идентификационный номер дрона') ?>
+            <?= $LostForm->field($LostedDroneForm, 'idetificalNumber')->label('Учетный номер дрона') ?>
 
             <?= $LostForm->field($LostedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
@@ -144,7 +144,7 @@ use yii\widgets\Pjax;
             <din class="box__item__footer">
                 <div id="mapLost"></div>
 
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Login', ['class' => 'btn box__button yellow__bg', 'name' => 'login-button']) ?>
             </din>
             <?php ActiveForm::end(); ?>
         </div>

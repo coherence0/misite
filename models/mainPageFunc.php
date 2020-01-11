@@ -36,7 +36,12 @@ class mainPageFunc
 	}
 
 	public static function updateFindDron($form,$id){
-		$phone = mainPageFunc::getPhoneFromCode($form->verificationcode);;
+		$phone = mainPageFunc::getObjPhoneFromCode($form->verificationcode);
+        $secondPhone = Phone::find()->where(['uid'=>$id, 'status'=>'1'])->one();
+        if ($secondPhone != null){
+            $secondPhone->status = 0;
+            $secondPhone->save();
+        }
         $findDron = FindDrons::findOne($id);
         $findDron->name = $form->name;
         $findDron->surname = $form->surname;
@@ -80,7 +85,12 @@ class mainPageFunc
 	}
 
 	public static function updateLostDron($form,$id){
-		$phone = mainPageFunc::getPhoneFromCode($form->verificationcode);;
+		$phone = mainPageFunc::getObjPhoneFromCode($form->verificationcode);
+        $secondPhone = Phone::find()->where(['uid'=>$id, 'status'=>'1'])->one();
+        if ($secondPhone != null){
+            $secondPhone->status = 0;
+            $secondPhone->save();
+        }
         $lostDron = LostDrons::findOne($id);
         $lostDron->name = $form->name;
         $lostDron->surname = $form->surname;
