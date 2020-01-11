@@ -31,7 +31,13 @@ class SendSmsJob extends BaseObject implements \yii\queue\JobInterface
 			$sms = $smsru->send_one($data);
             $phone->save();
     	}else {
+            $phoneInfo->varification_code = mt_rand(10000,99999);
     		$phoneInfo->created_at = time();
+            
+            $data = new \stdClass();
+            $data->to = $this->phone;
+            $data->text = $phoneInfo->varification_code;
+            $sms = $smsru->send_one($data);
             $phoneInfo->save();
     	}
     }

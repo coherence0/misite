@@ -10,8 +10,6 @@ ymaps.ready(function () {
             );
         createMap(mapState);
     }, function (e) {
-        console.log(1);
-        console.error(e);
         // Если местоположение невозможно получить, то просто создаем карту.
         createMap({
             center: [55.751574, 37.573856],
@@ -38,7 +36,6 @@ ymaps.ready(function () {
         // console.log(coords);
         // alert(coords.join(', '));
         });
-        fitMapToViewport();
     }
 });
 
@@ -54,17 +51,16 @@ ymaps.ready(function () {
             );
         createMap(mapState);
     }, function (e) {
-        console.log(2);
-        console.error(e);
         // Если местоположение невозможно получить, то просто создаем карту.
         createMap({
             center: [55.751574, 37.573856],
             zoom: 2
         });
     });
-
+    
     function createMap (state) {
         map = new ymaps.Map('mapLost', state);
+
         map.events.add('click', function (e) {
     // Получение координат щелчка
         var coords = e.get('coords');
@@ -80,6 +76,5 @@ ymaps.ready(function () {
             iconColor: '#0095b6'
         }))
         });
-        fitMapToViewport()
     }
 });
