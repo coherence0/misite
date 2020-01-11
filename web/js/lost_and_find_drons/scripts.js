@@ -1,4 +1,4 @@
-const addStyleOnForm = (formID) => {
+const addStyleOnForm = (formID) => {	
 	let is_close = $('.img-one').hasClass('img-container--left') && $('.img-two').hasClass('img-container--right');
 	
 	if (is_close){

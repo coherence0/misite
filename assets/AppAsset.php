@@ -26,9 +26,11 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/maps.js',
-        'js/lost_and_find_drons/scripts.js'
+        'js/lost_and_find_drons/scripts.js',
+        'js/confirmPhone.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
+
     ];
 }

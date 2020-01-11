@@ -29,21 +29,23 @@ use yii\widgets\Pjax;
     </div>
     <div class="img-container form">
         <div class="box__item hidden" id="find_form">
-            <?php Pjax::begin(); ?>
-
+            <p id='output'></p>
             <?php if (!empty($status)): ?>
                 <p><code class="message"><?= $status ?></code></p>
             <?php endif; ?>
 
-            <?php $findPhoneForm = ActiveForm::begin(['id' => 'findedDronePhoneForm', 'options' => ['data-pjax' => true]]); ?>
+            <?php $findPhoneForm = ActiveForm::begin([
+                'id' => 'findedDronePhoneForm',
+                'action' => '/main/confirm',
+                'method' => 'post',
+                'enableAjaxValidation' => false,
+            ]); ?>
 
             <?= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон') ?>
 
             <?= Html::submitButton('Подтвердить', ['class' => 'btn red__bg', 'name' => 'approve-button']) ?>
 
             <?php ActiveForm::end(); ?>
-
-            <?php Pjax::end(); ?>
 
             <?php $FindForm = ActiveForm::begin([
                 'options' => ['id' => 'findedDroneForm'],
@@ -155,4 +157,3 @@ use yii\widgets\Pjax;
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
     </div>
 </footer>
-

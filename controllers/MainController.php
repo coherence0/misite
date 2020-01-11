@@ -116,6 +116,36 @@ class MainController extends Controller
         return $this->render('index', $values);
     }
 
+    public function actionConfirm(){
+
+        $PhoneForm = new PhoneForm();
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        // Если пришёл AJAX запрос
+        if (Yii::$app->request->isAjax) { 
+            $data = Yii::$app->request->post();
+            // Получаем данные модели из запроса
+            if ($PhoneForm->load($data)) {
+                //Если всё успешно, отправляем ответ с данными
+                return [
+                    "data" => 'hiihih',
+                    "error" => null
+                ];
+            } else {
+                // Если нет, отправляем ответ с сообщением об ошибке
+                return [
+                    "data" => null,
+                    "error" => "error1"
+                ];
+            }
+        } else {
+            // Если это не AJAX запрос, отправляем ответ с сообщением об ошибке
+            return [
+                "data" => null,
+                "error" => "error2"
+            ];
+        }
+    }
+
     // public function actionTest(){
     //     $pair = new Pairs();
     //     $finded = FindDrons::findOne(12);
