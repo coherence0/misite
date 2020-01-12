@@ -128,6 +128,7 @@ class MainController extends Controller
                 //Если всё успешно, отправляем ответ с данными
                 $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
                 if (!$phone){
+                    $status = 'send';
                     mainPageFunc::sendSMS($PhoneForm->phone);
                 }else {
                     $status = 'ok';
