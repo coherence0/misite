@@ -150,6 +150,9 @@ img {
     z-index: 2;
     margin-bottom: 1rem;
 }
+#output{
+    margin: 0;
+}
 .box__button {
     width: 100%;
 }
