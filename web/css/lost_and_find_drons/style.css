@@ -16,7 +16,7 @@
 .box__item{
     padding: 10px 20px;
     height:100%;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 }
 .box__item::-webkit-scrollbar {
   display: none;
@@ -31,6 +31,7 @@ h1 {
 
 .img-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 3vh;
@@ -40,6 +41,7 @@ h1 {
     z-index: 1;
     transition: transform 0.3s ease-in;
     color: white;
+    overflow: scroll;
 }
 
 .img-container--left {
@@ -68,6 +70,11 @@ h1 {
     grid-template-columns: 1fr 1fr;
     grid-column-end: 2;
 }
+#findedDronePhoneForm {
+    margin-top: 125px;
+    width: 100%;
+    padding: 5px 25px;
+}
 @media (min-width: 1600px) {
     #find{
         padding-left: 70px;
@@ -86,7 +93,6 @@ h1 {
     border-radius: 8px;
     height: 75%;
     font-family: LIBRARY_3, sans-serif;
-
 }
 .img-container__item p{
     width: 80%;
