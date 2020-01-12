@@ -93,7 +93,7 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
 		$hschar = array();
 		foreach ($mychar as $key => $val) {
 		   $ch = chr($key);
-		   $hschar[$ch]=$val; 
+		   $hschar{$ch}=$val; 
 		}
 
 		$alfb = "abcdefghijklmnopqrstuvwxyz0123456789";   ## N-мерная метрика
@@ -108,7 +108,7 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
 		                   $val="";
 		                   if (!in_array($aw, $hschar))
 		                   	continue;
-		                   $val = $hschar[$aw];
+		                   $val = $hschar{$aw};
 		                   if($val){ 
 		                            $vv=$val;   
 		                             }else{ $vv=0; }
