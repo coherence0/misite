@@ -219,3 +219,6 @@ img {
         display: initial;
     }
 }
+.navbar-toggler{
+    display: none;
+}
