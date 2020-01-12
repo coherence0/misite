@@ -127,8 +127,8 @@ class MainController extends Controller
             if ($PhoneForm->load($data) && $PhoneForm->validate()) {
                 //Если всё успешно, отправляем ответ с данными
                 $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
-                if ($phone == null){
-                    $status = 'null';
+                if (!$phone){
+                    mainPageFunc::sendSMS($PhoneForm->phone);
                 }else {
                     $status = 'ok';
                 }
