@@ -80,7 +80,7 @@ class mainPageFunc
         $config =[
                    'fid' => $lostDron->id
                 ];
-		Yii::$app->queue->push(new FindDronsJob($config));
+		Yii::$app->queue->push(new LostDronsJob($config));
      	Yii::$app->session->addFlash('success','Дрон добавлен');
 	}
 
