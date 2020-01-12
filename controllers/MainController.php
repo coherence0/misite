@@ -127,25 +127,19 @@ class MainController extends Controller
             if ($PhoneForm->load($data) && $PhoneForm->validate()) {
                 //Если всё успешно, отправляем ответ с данными
                 $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
-                if (!$phone){
-                    $status = 'send';
+                if(!$phone){
                     mainPageFunc::sendSMS($PhoneForm->phone);
-                }else {
-                    $status = 'ok';
-                }
-                // if(!$phone){
-                //     mainPageFunc::sendSMS($PhoneForm->phone);
-                //     $status = 'Сообщение отправленно';  
-                // } else {
-                //     $time = time();
-                //     $phone->created_at += 60;
-                //     if ($time > $phone->created_at){
-                //         mainPageFunc::sendSMS($PhoneForm->phone);
-                //         $status = 'Сообщение отправленно';
-                //     }else {
-                //         $status = "Подождите " . ($phone->created_at - $time) . " секунд";
-                //     }
-                // }    
+                    $status = 'Сообщение отправленно';  
+                } else {
+                    $time = time();
+                    $phone->created_at += 60;
+                    if ($time > $phone->created_at){
+                        mainPageFunc::sendSMS($PhoneForm->phone);
+                        $status = 'Сообщение отправленно';
+                    }else {
+                        $status = "Подождите " . ($phone->created_at - $time) . " секунд";
+                    }
+                }    
                 return [
                     "data" => $PhoneForm->phone,
                     "error" => $status
