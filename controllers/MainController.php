@@ -39,37 +39,37 @@ class MainController extends Controller
             return ActiveForm::validate($LostedDroneForm);
         }
 
-        if(Yii::$app->request->isPjax){
-            if ($PhoneForm->load(Yii::$app->request->post()) && $PhoneForm->validate()){
-                $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
-                if(!$phone){
-                    mainPageFunc::sendSMS($PhoneForm->phone);
-                    $status = 'Сообщение отправленно';  
-                }else {
-                    $time = time();
-                    $phone->created_at += 60;
-                    if ($time > $phone->created_at){
-                        mainPageFunc::sendSMS($PhoneForm->phone);
-                        $status = 'Сообщение отправленно';
-                    }else {
-                        $status = "Подождите " . ($phone->created_at - $time) . " секунд";
-                    }
-                }    
-            } else {
-                $status = 'Вы неверно ввели номер';
-            }
+        // if(Yii::$app->request->isPjax){
+        //     if ($PhoneForm->load(Yii::$app->request->post()) && $PhoneForm->validate()){
+        //         $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
+        //         if(!$phone){
+        //             mainPageFunc::sendSMS($PhoneForm->phone);
+        //             $status = 'Сообщение отправленно';  
+        //         }else {
+        //             $time = time();
+        //             $phone->created_at += 60;
+        //             if ($time > $phone->created_at){
+        //                 mainPageFunc::sendSMS($PhoneForm->phone);
+        //                 $status = 'Сообщение отправленно';
+        //             }else {
+        //                 $status = "Подождите " . ($phone->created_at - $time) . " секунд";
+        //             }
+        //         }    
+        //     } else {
+        //         $status = 'Вы неверно ввели номер';
+        //     }
 
-            $values=[
-            'FindedDroneForm' => $FindedDroneForm,
-            'LostedDroneForm' => $LostedDroneForm,
-            'PhoneForm' => $PhoneForm,
-            'items' => $items,
-            'params' => $params,
-            'status' => $status,
-            ];
+        //     $values=[
+        //     'FindedDroneForm' => $FindedDroneForm,
+        //     'LostedDroneForm' => $LostedDroneForm,
+        //     'PhoneForm' => $PhoneForm,
+        //     'items' => $items,
+        //     'params' => $params,
+        //     'status' => $status,
+        //     ];
 
-            return $this->render('index', $values);
-        }
+        //     return $this->render('index', $values);
+        // }
 
         if ($FindedDroneForm->load(Yii::$app->request->post()) && $FindedDroneForm->validate()){
             $id = mainPageFunc::getIdFromFindRegNumber($FindedDroneForm->idetificalNumber);
@@ -124,24 +124,38 @@ class MainController extends Controller
         if (Yii::$app->request->isAjax) { 
             $data = Yii::$app->request->post();
             // Получаем данные модели из запроса
-            if ($PhoneForm->load($data)) {
+            if ($PhoneForm->load($data) && $PhoneForm->validate()) {
                 //Если всё успешно, отправляем ответ с данными
+                $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
+                if(!$phone){
+                    mainPageFunc::sendSMS($PhoneForm->phone);
+                    $status = 'Сообщение отправленно';  
+                } else {
+                    $time = time();
+                    $phone->created_at += 60;
+                    if ($time > $phone->created_at){
+                        mainPageFunc::sendSMS($PhoneForm->phone);
+                        $status = 'Сообщение отправленно';
+                    }else {
+                        $status = "Подождите " . ($phone->created_at - $time) . " секунд";
+                    }
+                }    
                 return [
-                    "data" => 'hiihih',
-                    "error" => null
+                    "data" => $PhoneForm->phone,
+                    "error" => $status
                 ];
             } else {
                 // Если нет, отправляем ответ с сообщением об ошибке
                 return [
                     "data" => null,
-                    "error" => "error1"
+                    "error" => "Ошибка валидации"
                 ];
             }
         } else {
             // Если это не AJAX запрос, отправляем ответ с сообщением об ошибке
             return [
                 "data" => null,
-                "error" => "error2"
+                "error" => "Не AJAX запрос"
             ];
         }
     }
