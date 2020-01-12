@@ -42,8 +42,13 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
                     	->setSubject('Ваш дрон найден!')
                     	->setTextBody("Его нашел ".$key->name)
                     	->send();
-
-        	}elseif($out['Similarity'] > 80 && LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) {
+                $pair->id = null;
+        		$pair->lid = $this->fid;
+        		$pair->fid = $key->id;
+        		$pair->match_rate = $out['Similarity'];
+        		$pair->distance = LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
+        		$pair->save();
+        	}elseif(($out['Similarity'] > 80) && (LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) && (LostDronsJob::countCoincidences($losted->drone_reg_number, $key->drone_reg_number)==1)) {
         		//отправляем письма
         		Yii::$app->mailer->compose()
                 	    ->setTo($losted->email)
@@ -51,14 +56,14 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
                     	->setSubject('Возможно ваш дрон найден!')
                     	->setTextBody("Его нашел ".$key->name)
                     	->send();	
-        	}
 
-        	$pair->id = null;
-        	$pair->lid = $this->fid;
-        	$pair->fid = $key->id;
-        	$pair->match_rate = $out['Similarity'];
-        	$pair->distance = LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
-        	$pair->save();
+                $pair->id = null;
+        		$pair->lid = $this->fid;
+        		$pair->fid = $key->id;
+        		$pair->match_rate = $out['Similarity'];
+        		$pair->distance = LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
+        		$pair->save();
+        	}
         }
     }
 
@@ -172,5 +177,17 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
 	$dist = $ad * EARTH_RADIUS;
  
 	return $dist;
+	}
+
+	private static function countCoincidences($str1, $str2){
+		if (strlen($str1)!= strlen($str2))
+			return null;
+		$difference = 0;
+		$i = 0;
+		for ($i; $i < strlen($str1); $i++){
+			if ($str1[$i] != $str2[$i])
+				$difference++;
+		} 
+		return $difference;
 	}
 }

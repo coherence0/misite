@@ -41,13 +41,26 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
                     	->setTextBody("Его нашел ".$finded->name)
                     	->send();
 
-        	}elseif($out['Similarity'] > 80 && FindDrons::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) {
+                $pair->id = null;
+        		$pair->fid = $this->fid;
+        		$pair->lid = $key->id;
+        		$pair->match_rate = $out['Similarity'];
+        		$pair->distance = FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
+        		$pair->save();
+
+        	}elseif(($out['Similarity'] > 80) && (FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) && (FindDronsJob::countCoincidences($losted->drone_reg_number, $key->drone_reg_number)==1)) {
         		Yii::$app->mailer->compose()
                 	    ->setTo($key->email)
                     	->setFrom(["tdlyatesta@yandex.ru"=>'ya'])
                     	->setSubject('Возможно ваш дрон найден!')
                     	->setTextBody("Его нашел ".$finded->name)
                     	->send();
+                $pair->id = null;
+        		$pair->fid = $this->fid;
+        		$pair->lid = $key->id;
+        		$pair->match_rate = $out['Similarity'];
+        		$pair->distance = FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
+        		$pair->save();
         	}
 
         	$pair->id = null;
@@ -84,8 +97,10 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
 		      $ch = chr($i);
 		      $q_hschar{$ch}=$val;
 		}
-
 		$mychar = count_chars($rowV1, 1);
+
+		$hschar_copy;
+		$hschar = array();
 		foreach ($mychar as $key => $val) {
 		   $ch = chr($key);
 		   $hschar{$ch}=$val; 
@@ -101,7 +116,9 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
 		foreach($alfbarr as $aw){
 		            if($aw!=""){
 		                   $val="";
-		                   $val =  $hschar{$aw};
+		                   if (!isset($hschar{$aw}))
+		                   	continue;
+		                   $val = $hschar{$aw};
 		                   if($val){ 
 		                            $vv=$val;   
 		                             }else{ $vv=0; }
@@ -165,5 +182,17 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
 	$dist = $ad * EARTH_RADIUS;
  
 	return $dist;
+	}
+
+	private static function countCoincidences($str1, $str2){
+		if (strlen($str1)!= strlen($str2))
+			return null;
+		$difference = 0;
+		$i = 0;
+		for ($i; $i < strlen($str1); $i++){
+			if ($str1[$i] != $str2[$i])
+				$difference++;
+		} 
+		return $difference;
 	}
 }
