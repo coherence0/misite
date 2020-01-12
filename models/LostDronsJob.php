@@ -28,14 +28,9 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
         	$long1 = $losted->y_coords;
         	$lat2 = $key->x_coords;
         	$long2 = $key->y_coords;
-        	LostDronsJob::invarDistance($losted->drone_reg_number, $key->drone_reg_number, $out);
 
-        	if ($out['Similarity'] < 80)
-        		continue; 
-
-        	if ($out['Similarity'] == 100){
+        	if ($losted->drone_reg_number == $key->drone_reg_number){
         		//отправляем письма
-
         		Yii::$app->mailer->compose()
                 	    ->setTo($losted->email)
                     	->setFrom(["tdlyatesta@yandex.ru"=>'ya'])
@@ -46,9 +41,9 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
         		$pair->lid = $this->fid;
         		$pair->fid = $key->id;
         		$pair->match_rate = $out['Similarity'];
-        		$pair->distance = LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
+        		//$pair->distance = LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
         		$pair->save();
-        	}elseif(($out['Similarity'] > 80) && (LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) && (LostDronsJob::countCoincidences($losted->drone_reg_number, $key->drone_reg_number)==1)) {
+        	}elseif((LostDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) && (LostDronsJob::countCoincidences($losted->drone_reg_number, $key->drone_reg_number)==1)) {
         		//отправляем письма
         		Yii::$app->mailer->compose()
                 	    ->setTo($losted->email)
@@ -66,71 +61,6 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
         	}
         }
     }
-
-    private static function invarDistance($query,$rowV1,&$outpar){   
-		$hs1 = array();
-		$hs2 = array();
-		$out = array();
-
-		$query = LostDronsJob::translitIt($query);
-		$query  = strtolower($query);
-		$query = substr($query, 0, 255);
-		$rowV1 = LostDronsJob::translitIt($rowV1);
-		$rowV1  = strtolower($rowV1);
-		$rowV1 = substr($rowV1, 0, 255);
-
-		$query = preg_replace('/[^a-z0-9]/', '', $query);
-		$rowV1 = preg_replace('/[^a-z0-9]/', '', $rowV1);
-
-		$lengquery = strlen($query); 
-		$lengrowV1 = strlen($rowV1); 
-
-		$lengtotal = ($lengrowV1 + $lengquery); 
-		$outpar{"lengtotal"}=$lengtotal;
-//-------------------------count_chars()---------------------------------------------               
-		foreach (count_chars($query, 1) as $i => $val) {
-		      $ch = chr($i);
-		      $q_hschar{$ch}=$val;
-		}
-		$mychar = count_chars($rowV1, 1);
-
-		$hschar_copy;
-		$hschar = array();
-		foreach ($mychar as $key => $val) {
-		   $ch = chr($key);
-		   $hschar{$ch}=$val; 
-		}
-
-		$alfb = "abcdefghijklmnopqrstuvwxyz0123456789";   ## N-мерная метрика
-		$alfbarr = preg_split("//",$alfb);
-
-		$sum1 = 0;
-		$sum2 = 0;
-		$sumdel = 0;
-
-		foreach($alfbarr as $aw){
-		            if($aw!=""){
-		                   $val="";
-		                   if (!isset($hschar{$aw}))
-		                   	continue;
-		                   $val = $hschar{$aw};
-		                   if($val){ 
-		                            $vv=$val;   
-		                             }else{ $vv=0; }
-		                   $val2="";
-		                   $val2 =  $q_hschar{$aw};
-		                   if($val2){ 
-		                             $vv2=$val2;   
-		                             }else{ $vv2=0;}
- 		                   $sumdel += abs($vv - $vv2);
-		            }
-		}       
-
-		$per = 100*(1 - $sumdel/$lengtotal);
-		$pern = sprintf("%5.2f", $per);
-		$outpar{"Error.count"}=$sumdel;
-		$outpar{"Similarity"}=$pern;
-	}
 
 	private static function translitIt($str){
     	$tr = array(
