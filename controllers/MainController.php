@@ -119,27 +119,28 @@ class MainController extends Controller
     public function actionConfirm(){
 
         $PhoneForm = new PhoneForm();
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         // Если пришёл AJAX запрос
         if (Yii::$app->request->isAjax) { 
             $data = Yii::$app->request->post();
             // Получаем данные модели из запроса
             if ($PhoneForm->load($data) && $PhoneForm->validate()) {
                 //Если всё успешно, отправляем ответ с данными
-                $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
-                if(!$phone){
-                    mainPageFunc::sendSMS($PhoneForm->phone);
-                    $status = 'Сообщение отправленно';  
-                } else {
-                    $time = time();
-                    $phone->created_at += 60;
-                    if ($time > $phone->created_at){
-                        mainPageFunc::sendSMS($PhoneForm->phone);
-                        $status = 'Сообщение отправленно';
-                    }else {
-                        $status = "Подождите " . ($phone->created_at - $time) . " секунд";
-                    }
-                }    
+                $status = 'ok';
+                // $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
+                // if(!$phone){
+                //     mainPageFunc::sendSMS($PhoneForm->phone);
+                //     $status = 'Сообщение отправленно';  
+                // } else {
+                //     $time = time();
+                //     $phone->created_at += 60;
+                //     if ($time > $phone->created_at){
+                //         mainPageFunc::sendSMS($PhoneForm->phone);
+                //         $status = 'Сообщение отправленно';
+                //     }else {
+                //         $status = "Подождите " . ($phone->created_at - $time) . " секунд";
+                //     }
+                // }    
                 return [
                     "data" => $PhoneForm->phone,
                     "error" => $status
