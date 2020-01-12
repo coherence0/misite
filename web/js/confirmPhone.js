@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#FindedDronePhoneForm').on('beforeSubmit', function() {
+    $('#findedDronePhoneForm').on('beforeSubmit', function() {
         // Получаем объект формы
         var $testform = $(this);
         // отправляем данные на сервер
@@ -9,7 +9,10 @@ $(document).ready(function() {
             // URL для отправки запроса
             url : $testform.attr('action'),
             // Данные формы
+            //headers: {'X-Requested-With': 'XMLHttpRequest'}
+            // crossDomain: false
             data : $testform.serializeArray()
+            //data: {$testform.serializeArray(), <?= Yii::$app->getRequest()->csrfParam?> : "<?= Yii::$app->getRequest()->getCsrfToken()?>"},
         }).done(function(data) {
             console.log(data.data);
                 if (data.error == null) {

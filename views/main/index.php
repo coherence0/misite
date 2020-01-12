@@ -22,6 +22,7 @@ use yii\widgets\Pjax;
     </div>
     <div class="img-container form">
         <div class="box__item phone">
+            <p id='output'></p>
             <?php $findPhoneForm = ActiveForm::begin([
                 'id' => 'findedDronePhoneForm',
                 'action' => '/main/confirm',
@@ -37,7 +38,7 @@ use yii\widgets\Pjax;
             <?php ActiveForm::end(); ?>
         </div>
         <div class="box__item hidden" id="find_form">
-            <p id='output'></p>
+
 
             <?php $FindForm = ActiveForm::begin([
                 'options' => ['id' => 'findedDroneForm'],
