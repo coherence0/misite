@@ -22,7 +22,8 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/all.css',
-        'css/lost_and_find_drons/style.css'
+        'css/lost_and_find_drons/style.css',
+        'css/lost_and_find_drons/animation.css'
     ];
     public $js = [
         'js/maps.js',
