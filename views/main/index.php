@@ -28,22 +28,24 @@ use yii\widgets\Pjax;
         </div>
     </div>
     <div class="img-container form">
-        <div class="box__item hidden" id="find_form">
+        <div class="box__item phone">
             <p id='output'></p>
-
             <?php $findPhoneForm = ActiveForm::begin([
                 'id' => 'findedDronePhoneForm',
                 'action' => '/main/confirm',
-                'method' => 'POST',
+                'method' => 'post',
                 'enableAjaxValidation' => false,
-                'options'=>['class'=>'hidden']
+                'options' => ['class' => ' hidden'],
             ]); ?>
 
             <?= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон') ?>
 
-            <?= Html::submitButton('Подтвердить', ['class' => 'btn red__bg', 'name' => 'approve-button']) ?>
+            <?= Html::submitButton('Подтвердить', ['class' => 'btn red__bg', 'name' => 'approve-button', 'id' => 'phoneConfirmBtn']) ?>
 
             <?php ActiveForm::end(); ?>
+        </div>
+        <div class="box__item hidden" id="find_form">
+
 
             <?php $FindForm = ActiveForm::begin([
                 'options' => ['id' => 'findedDroneForm'],
