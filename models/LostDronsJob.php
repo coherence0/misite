@@ -106,7 +106,7 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
 		foreach($alfbarr as $aw){
 		            if($aw!=""){
 		                   $val="";
-		                   if (!($aw, $hschar))
+		                   if (!in_array($aw, $hschar))
 		                   	continue;
 		                   $val = $hschar[$aw];
 		                   if($val){ 
