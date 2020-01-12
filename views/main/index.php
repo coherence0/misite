@@ -20,13 +20,6 @@ use yii\widgets\Pjax;
         </div>
 
     </div>
-    <div class="img-container img-two" id="lost">
-        <div class="img-container__item blue">
-            <h2>Я потерял<br> дрон</h2>
-            <p>Кликните на дрон и заполните форму, и мы отправим вам данные человека нашедшего ваш дрона!</p>
-            <div class="img-container__item--image lost"></div>
-        </div>
-    </div>
     <div class="img-container form">
         <div class="box__item phone">
             <?php $findPhoneForm = ActiveForm::begin([
@@ -83,11 +76,11 @@ use yii\widgets\Pjax;
                 ]
 
             ]); ?>
-        <div class="box__item__footer">
-            <div id="mapFind"></div>
+            <div class="box__item__footer">
+                <div id="mapFind"></div>
 
-            <?= Html::submitButton('Login', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
-        </div>
+                <?= Html::submitButton('Login', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
+            </div>
             <?php ActiveForm::end(); ?>
         </div>
         <div class="box__item hidden" id="lost_form">
@@ -135,6 +128,13 @@ use yii\widgets\Pjax;
                 <?= Html::submitButton('Login', ['class' => 'btn box__button yellow__bg', 'name' => 'login-button']) ?>
             </din>
             <?php ActiveForm::end(); ?>
+        </div>
+    </div>
+    <div class="img-container img-two" id="lost">
+        <div class="img-container__item blue">
+            <h2>Я потерял<br> дрон</h2>
+            <p>Кликните на дрон и заполните форму, и мы отправим вам данные человека нашедшего ваш дрона!</p>
+            <div class="img-container__item--image lost"></div>
         </div>
     </div>
 </div>

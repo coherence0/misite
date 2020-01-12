@@ -13,7 +13,7 @@
     background-color: #007bff;
 }
 .box__item{
-    padding: 10px 20px;
+    padding: 5px 10px;
     width:85%;
 }
 .box__item::-webkit-scrollbar {
@@ -187,4 +187,32 @@ img {
 }
 .text-header{
     font-size: 8px;
+}
+
+@media (max-width: 750px) {
+    .box{
+        position: initial;
+        flex-direction: column;
+        height: initial;
+    }
+    .box__item{
+        padding: initial;
+    }
+    .img-container{
+        position: initial;
+        width: 100%;
+    }
+    .img-container--left{
+        transform: translateY(-50%);
+    }
+    .img-container--right{
+        transform: translateY(50%);
+    }
+
+    .img-container__item{
+        height: 480px;
+    }
+    #findedDroneForm, #lostedDroneForm{
+        display: initial;
+    }
 }
