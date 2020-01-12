@@ -29,15 +29,15 @@ class MainController extends Controller
         ];
 
         
-        if (Yii::$app->request->isAjax && $FindedDroneForm->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($FindedDroneForm);
-        }
+        // if (Yii::$app->request->isAjax && $FindedDroneForm->load(Yii::$app->request->post())) {
+        //     Yii::$app->response->format = Response::FORMAT_JSON;
+        //     return ActiveForm::validate($FindedDroneForm);
+        // }
 
-        if (Yii::$app->request->isAjax && $LostedDroneForm->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($LostedDroneForm);
-        }
+        // if (Yii::$app->request->isAjax && $LostedDroneForm->load(Yii::$app->request->post())) {
+        //     Yii::$app->response->format = Response::FORMAT_JSON;
+        //     return ActiveForm::validate($LostedDroneForm);
+        // }
 
         // if(Yii::$app->request->isPjax){
         //     if ($PhoneForm->load(Yii::$app->request->post()) && $PhoneForm->validate()){
@@ -123,8 +123,10 @@ class MainController extends Controller
         // Если пришёл AJAX запрос
         if (Yii::$app->request->isAjax) { 
             $data = Yii::$app->request->post();
+            //Yii::$app->response->format = Response::FORMAT_JSON;
             // Получаем данные модели из запроса
-            if ($PhoneForm->load($data) && $PhoneForm->validate()) {
+            if ($PhoneForm->load($data) && $PhoneForm->validate()) 
+            {
                 //Если всё успешно, отправляем ответ с данными
                 $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
                 if(!$phone){
@@ -159,7 +161,6 @@ class MainController extends Controller
             ];
         }
     }
-
     // public function actionTest(){
     //     $pair = new Pairs();
     //     $finded = FindDrons::findOne(12);

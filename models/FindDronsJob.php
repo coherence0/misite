@@ -21,12 +21,10 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
         $finded = FindDrons::findOne($this->fid);
         $losted = LostDrons::find()->all();
         foreach ($losted as $key) {
-        	$pair->setIsNewRecord(true);
         	$lat1 = $finded->x_coords;
         	$long1 = $finded->y_coords;
         	$lat2 = $key->x_coords;
         	$long2 = $key->y_coords;
-        	//FindDronsJob::invarDistance($finded->drone_reg_number, $key->drone_reg_number, $out);
         	if ($finded->drone_reg_number == $key->drone_reg_number){
         		//отправляем письма
         		Yii::$app->mailer->compose()
@@ -36,55 +34,28 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
                     	->setTextBody("Его нашел ".$finded->name)
                     	->send();
 
-                $pair->id = null;
         		$pair->fid = $this->fid;
         		$pair->lid = $key->id;
-        		$pair->match_rate = $out['Similarity'];
+        		$pair->match_rate = FindDronsJob::countCoincidences($finded->drone_reg_number, $key->drone_reg_number);
         		$pair->distance = FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
         		$pair->save();
 
-        	}elseif((FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) && (FindDronsJob::countCoincidences($losted->drone_reg_number, $key->drone_reg_number)==1)) {
+        	}elseif((FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2) <= FIND_RADIUS) && (FindDronsJob::countCoincidences($finded->drone_reg_number, $key->drone_reg_number)==1)) {
         		Yii::$app->mailer->compose()
                 	    ->setTo($key->email)
                     	->setFrom(["tdlyatesta@yandex.ru"=>'ya'])
                     	->setSubject('Возможно ваш дрон найден!')
                     	->setTextBody("Его нашел ".$finded->name)
                     	->send();
-                $pair->id = null;
+                    	
         		$pair->fid = $this->fid;
         		$pair->lid = $key->id;
-        		$pair->match_rate = $out['Similarity'];
+        		$pair->match_rate = FindDronsJob::countCoincidences($finded->drone_reg_number, $key->drone_reg_number);
         		$pair->distance = FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
         		$pair->save();
         	}
-
-        	$pair->id = null;
-        	$pair->fid = $this->fid;
-        	$pair->lid = $key->id;
-        	$pair->match_rate = $out['Similarity'];
-        	$pair->distance = FindDronsJob::calculateTheDistance($lat1,$long1,$lat2,$long2);
-        	$pair->save();
         }
     }
-
-	private static function translitIt($str){
-    	$tr = array(
-    	    "А"=>"A","Б"=>"B","В"=>"V","Г"=>"G",
-    	    "Д"=>"D","Е"=>"E","Ж"=>"J","З"=>"Z","И"=>"I",
-    	    "Й"=>"Y","К"=>"K","Л"=>"L","М"=>"M","Н"=>"N",
-    	    "О"=>"O","П"=>"P","Р"=>"R","С"=>"S","Т"=>"T",
-    	    "У"=>"U","Ф"=>"F","Х"=>"H","Ц"=>"TS","Ч"=>"CH",
-    	    "Ш"=>"SH","Щ"=>"SCH","Ъ"=>"","Ы"=>"YI","Ь"=>"",
-    	    "Э"=>"E","Ю"=>"YU","Я"=>"YA","а"=>"a","б"=>"b",
-    	    "в"=>"v","г"=>"g","д"=>"d","е"=>"e","ж"=>"j",
-    	    "з"=>"z","и"=>"i","й"=>"y","к"=>"k","л"=>"l",
-    	    "м"=>"m","н"=>"n","о"=>"o","п"=>"p","р"=>"r",
-    	    "с"=>"s","т"=>"t","у"=>"u","ф"=>"f","х"=>"h",
-    	    "ц"=>"ts","ч"=>"ch","ш"=>"sh","щ"=>"sch","ъ"=>"y",
-    	    "ы"=>"yi","ь"=>"","э"=>"e","ю"=>"yu","я"=>"ya"
-    	);
-    	return strtr($str,$tr);
-	}
 
 	private static function calculateTheDistance ($xA, $yA, $xB, $yB) {
  

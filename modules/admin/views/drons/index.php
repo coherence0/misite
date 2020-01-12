@@ -110,11 +110,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <script type="text/javascript">
-        $('#view').click(function(){
-            console.log('hui');
-            window.location.replace("http://stackoverflow.com");
-            //$('#editingDrone').modal('hide');
-        });
 
         $('.grid-view tbody tr').on('click', function(){
 
