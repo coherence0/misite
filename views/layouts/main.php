@@ -33,14 +33,7 @@ AppAsset::register($this);
             'class' => 'navbar-dark navbar-expand-lg nav-bar dark-blue'
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-        ],
-    ]);
+
     NavBar::end();
     ?>
 </header>
