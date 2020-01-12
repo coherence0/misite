@@ -166,3 +166,25 @@ img {
 .message{
     color: white;
 }
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.navbar-brand img {
+    height: 50px;
+    width: 67.5px;
+}
+.navbar-brand span {
+    padding-left: 10px;
+    font-size: 10px;
+    line-height: 18px;
+    margin: 0 0 2px 0;
+    width: 390px;
+    word-wrap: break-word;
+}
+.small-text-header{
+    font-size: 10px;
+}
+.text-header{
+    font-size: 16px;
+}
