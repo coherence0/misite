@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#findedDronePhoneForm').on('beforeSubmit', function() {
+    $('#FindedDronePhoneForm').on('beforeSubmit', function() {
         // Получаем объект формы
         var $testform = $(this);
         // отправляем данные на сервер

@@ -30,9 +30,6 @@ use yii\widgets\Pjax;
     <div class="img-container form">
         <div class="box__item hidden" id="find_form">
             <p id='output'></p>
-            <?php if (!empty($status)): ?>
-                <p><code class="message"><?= $status ?></code></p>
-            <?php endif; ?>
 
             <?php $findPhoneForm = ActiveForm::begin([
                 'id' => 'findedDronePhoneForm',
@@ -92,20 +89,7 @@ use yii\widgets\Pjax;
             <?php ActiveForm::end(); ?>
         </div>
         <div class="box__item hidden" id="lost_form">
-            <?php Pjax::begin(); ?>
-            <?php if (!empty($status)): ?>
-                <p><code class="message"><?= $status ?></code></p>
-            <?php endif; ?>
 
-            <?php $LostedphoneForm = ActiveForm::begin(['id' => 'lostedDronePhoneForm', 'options' => ['data-pjax' => true]]); ?>
-
-            <?= $LostedphoneForm->field($PhoneForm, 'phone')->label('Телефон') ?>
-
-            <?= Html::submitButton('Подтвердить', ['class' => 'btn yellow__bg', 'name' => 'approve-button']) ?>
-
-            <?php ActiveForm::end(); ?>
-
-            <?php Pjax::end(); ?>
             <?php $LostForm = ActiveForm::begin([
                 'options' => ['id' => 'lostedDroneForm'],
                 'fieldConfig' => ['options' => ['class' => 'form__field']],
