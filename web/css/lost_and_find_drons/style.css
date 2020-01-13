@@ -282,6 +282,9 @@ img {
     .padding-area{
         padding: 255px 0;
     }
+    .form__padding{
+        padding: 15px 0;
+    }
     .navbar-brand img {
         height: 60px;
         width: 81px;

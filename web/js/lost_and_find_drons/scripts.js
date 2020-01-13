@@ -11,17 +11,20 @@ const addStyleOnForm = (formID) => {
 		document.getElementById('findedDronePhoneForm').classList.toggle('hidden');
 	}
 };
-$('#find').on('click', () => {
-	addStyleOnForm('find');
-
+const toggleStyle = () => {
 	document.querySelector('.img-one').classList.toggle('img-container--left');
 	document.querySelector('.img-two').classList.toggle('img-container--right');
 	document.querySelector('.box').classList.toggle('padding-area');
+	document.querySelector('.form').classList.toggle('form__padding');
+};
+
+$('#find').on('click', () => {
+	addStyleOnForm('find');
+
+	toggleStyle();
 });
 $('#lost').on('click', () => {
 	addStyleOnForm('lost');
 
-	document.querySelector('.img-one').classList.toggle('img-container--left');
-	document.querySelector('.img-two').classList.toggle('img-container--right');
-	document.querySelector('.box').classList.toggle('padding-area');
+	toggleStyle();
 });
