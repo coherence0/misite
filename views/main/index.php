@@ -13,7 +13,7 @@ use yii\widgets\Pjax;
 ?>
 <div class="box">
     <div class="img-container img-one" id="find">
-        <div class="img-container__item red">
+        <div class="img-container__item black__bg red">
             <h2>Я нашел<br> дрон</h2>
             <p>Кликните на дрон и заполните форму, и мы отправим ваши данные владельцу дрона!</p>
             <div class="img-container__item--image find"></div>
@@ -132,7 +132,7 @@ use yii\widgets\Pjax;
         </div>
     </div>
     <div class="img-container img-two" id="lost">
-        <div class="img-container__item blue">
+        <div class="img-container__item white__bg blue">
             <h2>Я потерял<br> дрон</h2>
             <p>Кликните на дрон и заполните форму, и мы отправим вам данные человека нашедшего ваш дрона!</p>
             <div class="img-container__item--image lost"></div>
