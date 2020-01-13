@@ -1,9 +1,13 @@
 @font-face {
-    font-family: 'LIBRARY_3';
+    font-family: 'DINPRO';
     src: url("/fonts/DINPro.otf");
 }
+@font-face {
+    font-family: 'DINPROItalic';
+    src: url("/fonts/DINPro-Italic.otf");
+}
 html{
-    font-family: LIBRARY_3, sans-serif;
+    font-family: DINPRO, sans-serif;
 }
 /*.wrap{*/
 /*    background: url("/images/bg.png") no-repeat 50% 50%;*/
@@ -87,11 +91,10 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /*background-color: rgba(255, 255, 255, 0.5);*/
     margin: 35px;
     border-radius: 8px;
     height: 75%;
-    font-family: LIBRARY_3, sans-serif;
+    font-family: DINPRO, sans-serif;
 }
 .img-container__item p{
     width: 80%;
@@ -109,7 +112,7 @@ h1 {
 }
 .red__bg{
     color: white;
-    background-color: #ff0266;
+    background-color: #b30000 ;
 }
 .yellow{
     color: #ffde03;
@@ -128,13 +131,20 @@ h1 {
     color: black;
 }
 .black__bg{
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(0, 0, 0, .5);
 }
 .white{
     color: white;
 }
 .white__bg{
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, .5);
+}
+.header{
+    font-family: DINPROItalic, sans-serif;
+    background-color: #0005b3 ;
+}
+.footer{
+    background-color: rgb(200, 200, 200);
 }
 .img-container__item--image{
     height: auto;
@@ -142,11 +152,11 @@ h1 {
     width: 80%;
 }
 .img-container__item--image.find{
-    background: url('/images/finded_dron.png') no-repeat 50% 50%;
+    background: url('/images/LDrone1.png') no-repeat 50% 50%;
     background-size: contain;
 }
 .img-container__item--image.lost{
-    background: url('/images/losted_dron.png') no-repeat 50% 50%;
+    background: url('/images/RDrone1.png') no-repeat 50% 50%;
     background-size: contain;
 }
 .form__field{
@@ -172,6 +182,7 @@ img {
     display: none;
 }
 .form{
+    background-color: #b3b3b3;
     color:white;
     font-size: 16px;
 }
@@ -187,8 +198,8 @@ img {
     white-space: initial;
 }
 .navbar-brand img {
-    height: 50px;
-    width: 67.5px;
+    height: 90px;
+    width: 121.5px;
 }
 .navbar-brand span {
     padding-left: 10px;
@@ -271,13 +282,17 @@ img {
     .padding-area{
         padding: 255px 0;
     }
+    .navbar-brand img {
+        height: 60px;
+        width: 81px;
+    }
 }
 
 @media (max-width: 500px) {
     .small-text-header{
-        font-size: 5px;
+        font-size: 7px;
     }
     .text-header{
-        font-size: 8px;
+        font-size: 10px;
     }
 }

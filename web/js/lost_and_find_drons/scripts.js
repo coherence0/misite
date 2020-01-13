@@ -9,14 +9,6 @@ const addStyleOnForm = (formID) => {
 	} else {
 		document.getElementById(`${formID}_form`).classList.toggle('hidden');
 		document.getElementById('findedDronePhoneForm').classList.toggle('hidden');
-		addStyleOnButton(formID)
-	}
-};
-const addStyleOnButton = (formID) => {
-	if (formID === 'find'){
-		$('#phoneConfirmBtn').removeClass('yellow__bg').addClass('red__bg');
-	} else {
-		$('#phoneConfirmBtn').removeClass('red__bg').addClass('yellow__bg');
 	}
 };
 $('#find').on('click', () => {

@@ -30,7 +30,7 @@ AppAsset::register($this);
 «Государственная корпорация по организации воздушного движения в Российской Федерации»</div></div>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-dark navbar-expand-lg nav-bar dark-blue'
+            'class' => 'navbar-dark navbar-expand-lg nav-bar header'
         ],
     ]);
 
