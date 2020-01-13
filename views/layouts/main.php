@@ -27,7 +27,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="./images/logo.png"/><div style="padding-left: 10px"><div class="small-text-header">ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ</div><div class="text-header">
-«Государственная корпорация по организации <br> воздушного движения в Российской Федерации»</div></div>',
+«Государственная корпорация по организации воздушного движения в Российской Федерации»</div></div>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-dark navbar-expand-lg nav-bar dark-blue'

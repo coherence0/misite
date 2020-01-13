@@ -32,7 +32,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 3vh;
+    font-size: 24px;
     position: absolute;
     width: 50%;
     height: 100%;
@@ -125,7 +125,8 @@ h1 {
     background-color: #0336ff;
 }
 .img-container__item--image{
-    height: 40%;
+    height: auto;
+    flex-grow: 1;
     width: 80%;
 
 }
@@ -172,6 +173,7 @@ img {
 .navbar-brand {
     display: flex;
     align-items: center;
+    white-space: initial;
 }
 .navbar-brand img {
     height: 50px;
@@ -186,17 +188,17 @@ img {
     word-wrap: break-word;
 }
 .small-text-header{
-    font-size: 5px;
+    /*font-size: 5px;*/
 }
 .text-header{
-    font-size: 8px;
+    /*font-size: 8px;*/
 }
 
 @media (max-width: 750px) {
     .box{
-        position: initial;
         flex-direction: column;
         height: initial;
+        overflow: hidden;
     }
     .box__item{
         padding: initial;
@@ -206,17 +208,27 @@ img {
         width: 100%;
     }
     .img-container--left{
-        transform: translateY(-50%);
+        position: absolute;
+        top: 0;
+        height: 50%;
+        transform: translateY(-70%);
     }
     .img-container--right{
-        transform: translateY(50%);
+        position: absolute;
+        bottom: 0;
+        height: 50%;
+        transform: translateY(70%);
     }
 
     .img-container__item{
+        font-size: 16px;
         height: 480px;
     }
     #findedDroneForm, #lostedDroneForm{
         display: initial;
+    }
+    .padding-area{
+        padding: 255px 0;
     }
 }
 .navbar-toggler{
