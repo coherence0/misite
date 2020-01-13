@@ -188,12 +188,23 @@ img {
     word-wrap: break-word;
 }
 .small-text-header{
-    /*font-size: 5px;*/
+    font-size: 10px;
 }
 .text-header{
-    /*font-size: 8px;*/
+    font-size: 16px;
 }
 
+.navbar-toggler{
+    display: none;
+}
+@media (max-width: 1000px) {
+    .img-container__item p{
+        font-size: 16px;
+    }
+    .img-container__item h2{
+        font-size: 2rem;
+    }
+}
 @media (max-width: 750px) {
     .box{
         flex-direction: column;
@@ -231,6 +242,11 @@ img {
         padding: 255px 0;
     }
 }
-.navbar-toggler{
-    display: none;
+@media (max-width: 500px) {
+    .small-text-header{
+        font-size: 5px;
+    }
+    .text-header{
+        font-size: 8px;
+    }
 }
