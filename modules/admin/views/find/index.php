@@ -30,16 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             [
                 //'class' => DataColumn::className(), // Не обязательно
-                'attribute' => 'name',
+                'attribute' => 'name_surname',
                 'format' => 'text',
-                'label' => 'Имя',
-            ],
-
-            [
-                //'class' => DataColumn::className(), // Не обязательно
-                'attribute' => 'surname',
-                'format' => 'text',
-                'label' => 'Фамилия',
+                'label' => 'Имя и Фамилия',
             ],
 
             'email:email',
@@ -49,6 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'drone_reg_number',
                 'format' => 'text',
                 'label' => 'Регистрационный номер дрона',
+            ],
+
+            [
+                //'class' => DataColumn::className(), // Не обязательно
+                'attribute' => 'drone_serial_number',
+                'format' => 'text',
+                'label' => 'Серийный номер дрона',
             ],
 
             [

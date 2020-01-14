@@ -35,13 +35,13 @@ class LostDrons extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id','name','surname','thirdname','drone_id','drone_reg_number','email','date','x_coords','y_coords'],'trim'],
+            [['id','name_surname','thirdname','drone_id','drone_reg_number','drone_reg_number','email','date','x_coords','y_coords'],'trim'],
 
-            ['name','required','message'=>'Пожалуйста введите Имя'],
-            ['surname','required', 'message'=>'Пожалуйста введите Фамилию'],
+            ['name_surname','required','message'=>'Пожалуйста введите Имя и Фамилию'],
             ['thirdname', 'default'],
             ['drone_id','required','message'=>'Необходимо указать марку и модель дрона'],
-            ['drone_reg_number', 'required', 'message'=>'Необходимо указать идентификационный номер дрона'],
+            ['drone_reg_number', 'default','value'=>''],
+            ['drone_serial_number', 'default','value'=>''],
             ['email', 'required', 'message'=>'Введите пожалуйста ваш E-mail'],
             ['date', 'required', 'message'=>'Укажите пожалуйста дату'],
 
@@ -55,17 +55,17 @@ class LostDrons extends \yii\db\ActiveRecord
 
             //['name', 'string', 'length', 'max',=> 15,'message'=>'Имя должно быть не длинее 15 символов'],
 
-            ['name','string','max'=>15,'tooLong'=>'Имя не может быть длинее 15 символов'],
-            ['surname','string','max'=>15,'tooLong'=>'Фамилия не может быть длинее 15 символов'],
+            ['name_surname','string','max'=>35,'tooLong'=>'Имя и Фамилия не может быть длинее 35 символов'],
             ['thirdname','string','max'=>15,'tooLong'=>'Отчество не может быть длинее 15 символов'],
 
             ['thirdname', 'default', 'value'=>'нет'],
 
             //['verificationcode','match','pattern'=>'/[0-9]{5}/','message'=>'Неверный код'],
 
-            ['drone_reg_number','match','pattern' => '/[a-z]{1}[0-9]{6}|[0-9]{1}[a-z]{1}[0-9]{5}|[0-9]{2}[a-z]{1}[0-9]{4}|[0-9]{3}[a-z]{1}[0-9]{3}|[0-9]{4}[a-z]{1}[0-9]{2}|[0-9]{5}[a-z]{1}[0-9]{1}|[0-9]{6}[a-z]{1}/i','message'=>'Неправильно введен номер дрона'],
+            ['drone_reg_number','validateRegNumber','message'=>'Неправильно введен номер дрона'],
             ['x_coords', 'double'],
             ['y_coords', 'double']
+
         ];
     }
 
@@ -76,17 +76,25 @@ class LostDrons extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'surname' => 'Surname',
+            'name_surname' => 'Name',
             'thirdname' => 'Thirdname',
             'email' => 'Email',
             'drone_id' => 'Drone ID',
             'drone_reg_number' => 'Drone Reg Number',
+            'drone_serial_number' => 'Drone serial Number',
             'date' => 'Date',
             'x_coords' => 'X Coords',
             'y_coords' => 'Y Coords',
             'created_at' => 'Created At',
         ];
+    }
+
+    public function validateRegNumber($attribute, $param){
+        if ($this->$attribute != ''){
+            $regexp = '/[a-z]{1}[0-9]{6}|[0-9]{1}[a-z]{1}[0-9]{5}|[0-9]{2}[a-z]{1}[0-9]{4}|[0-9]{3}[a-z]{1}[0-9]{3}|[0-9]{4}[a-z]{1}[0-9]{2}|[0-9]{5}[a-z]{1}[0-9]{1}|[0-9]{6}[a-z]{1}/i';
+            if (!preg_match($regexp, $this->$attribute))
+                $this->addError($attribute, 'Неправильно введен номер дрона');
+        }
     }
 
     public static function getIdFromDronRegNumber($DronRegNumber){

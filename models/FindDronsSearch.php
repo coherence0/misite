@@ -18,7 +18,7 @@ class FindDronsSearch extends FindDrons
     {
         return [
             [['id', 'drone_id'], 'integer'],
-            [['name', 'surname', 'thirdname', 'email', 'drone_reg_number', 'date', 'x_coords', 'y_coords', 'created_at'], 'safe'],
+            [['name_surname', 'thirdname', 'email', 'drone_reg_number','drone_srial_number', 'date', 'x_coords', 'y_coords', 'created_at'], 'safe'],
         ];
     }
 
@@ -67,11 +67,11 @@ class FindDronsSearch extends FindDrons
             'date' => $this->date,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'surname', $this->surname])
+        $query->andFilterWhere(['like', 'name_surname', $this->name_surname])
             ->andFilterWhere(['like', 'thirdname', $this->thirdname])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'drone_reg_number', $this->drone_reg_number])
+            ->andFilterWhere(['like', 'drone_serial_number', $this->drone_serial_number])
             ->andFilterWhere(['like', 'x_coords', $this->x_coords])
             ->andFilterWhere(['like', 'y_coords', $this->y_coords])
             ->andFilterWhere(['like', 'model', $this->drons->model])

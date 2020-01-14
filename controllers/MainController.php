@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;  
+namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -28,52 +28,21 @@ class MainController extends Controller
             'prompt' => 'Укажите ваш дрон'
         ];
 
-        
-        // if (Yii::$app->request->isAjax && $FindedDroneForm->load(Yii::$app->request->post())) {
-        //     Yii::$app->response->format = Response::FORMAT_JSON;
-        //     return ActiveForm::validate($FindedDroneForm);
-        // }
+        if (Yii::$app->request->isAjax && $FindedDroneForm->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($FindedDroneForm);
+        }
 
-        // if (Yii::$app->request->isAjax && $LostedDroneForm->load(Yii::$app->request->post())) {
-        //     Yii::$app->response->format = Response::FORMAT_JSON;
-        //     return ActiveForm::validate($LostedDroneForm);
-        // }
+        if (Yii::$app->request->isAjax && $LostedDroneForm->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($LostedDroneForm);
+        }
 
-        // if(Yii::$app->request->isPjax){
-        //     if ($PhoneForm->load(Yii::$app->request->post()) && $PhoneForm->validate()){
-        //         $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
-        //         if(!$phone){
-        //             mainPageFunc::sendSMS($PhoneForm->phone);
-        //             $status = 'Сообщение отправленно';  
-        //         }else {
-        //             $time = time();
-        //             $phone->created_at += 60;
-        //             if ($time > $phone->created_at){
-        //                 mainPageFunc::sendSMS($PhoneForm->phone);
-        //                 $status = 'Сообщение отправленно';
-        //             }else {
-        //                 $status = "Подождите " . ($phone->created_at - $time) . " секунд";
-        //             }
-        //         }    
-        //     } else {
-        //         $status = 'Вы неверно ввели номер';
-        //     }
-
-        //     $values=[
-        //     'FindedDroneForm' => $FindedDroneForm,
-        //     'LostedDroneForm' => $LostedDroneForm,
-        //     'PhoneForm' => $PhoneForm,
-        //     'items' => $items,
-        //     'params' => $params,
-        //     'status' => $status,
-        //     ];
-
-        //     return $this->render('index', $values);
-        // }
 
         if ($FindedDroneForm->load(Yii::$app->request->post()) && $FindedDroneForm->validate()){
-            $id = mainPageFunc::getIdFromFindRegNumber($FindedDroneForm->idetificalNumber);
-            if ($id == NULL){
+            mainPageFunc::tolower($FindedDroneForm);
+            $id = mainPageFunc::getIdFromFindForm($FindedDroneForm);
+            if (mainPageFunc::idIsFind($id)){
                 $phone = mainPageFunc::getObjPhoneFromCode($FindedDroneForm->verificationcode);
                     if ($phone != NULL){
                         mainPageFunc::saveFindDron($FindedDroneForm,$phone);
@@ -84,7 +53,7 @@ class MainController extends Controller
                     return $this->goHome();
             }
         } elseif ($LostedDroneForm->load(Yii::$app->request->post()) && $LostedDroneForm->validate()){
-            $id = mainPageFunc::getIdFromLostRegNumber($LostedDroneForm->idetificalNumber);
+            $id = mainPageFunc::getIdFromLostRegNumber(strtolower($LostedDroneForm->drone_reg_number));
                 if ($id == NULL){
                 $phone = mainPageFunc::getObjPhoneFromCode($LostedDroneForm->verificationcode);
                     if ($phone != NULL){

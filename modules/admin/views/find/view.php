@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\FindDrons */
 
-$this->title = $model->name;
+$this->title = $model->name_surname;
 $this->params['breadcrumbs'][] = ['label' => 'Find Drons', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -37,16 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'name',
             [
-                'attribute' => 'name',
-                'value'=>$model['name'],
-                'label'=>'Имя'
-            ],
-
-            //'surname',
-            [
-                'attribute' => 'surname',
-                'value'=>$model['surname'],
-                'label'=>'Фамилия'
+                'attribute' => 'name_surname',
+                'value'=>$model['name_surname'],
+                'label'=>'Имя и Фамилия' 
             ],
             //'thirdname',
             
@@ -78,6 +71,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'drone_reg_number',
                 'value'=>$model['drone_reg_number'],
                 'label'=>'Регистарционный номер дрона'
+            ],
+
+            [
+                'attribute' => 'drone_serial_number',
+                'value'=>$model['drone_serial_number'],
+                'label'=>'Серийный номер дрона'
             ],
             //'date',
             [

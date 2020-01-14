@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\FindDrons */
 
-$this->title = 'Update Find Drons: ' . $model->name;
+$this->title = 'Update Find Drons: ' . $model->name_surname;
 $this->params['breadcrumbs'][] = ['label' => 'Find Drons', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->name_surname, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="find-drons-update">
