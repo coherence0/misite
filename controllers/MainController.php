@@ -53,7 +53,8 @@ class MainController extends Controller
                     return $this->goHome();
             }
         } elseif ($LostedDroneForm->load(Yii::$app->request->post()) && $LostedDroneForm->validate()){
-            $id = mainPageFunc::getIdFromLostRegNumber(strtolower($LostedDroneForm->drone_reg_number));
+            mainPageFunc::tolower($LostedDroneForm);
+            $id = mainPageFunc::getIdFromLostForm(strtolower($LostedDroneForm->drone_reg_number));
                 if ($id == NULL){
                 $phone = mainPageFunc::getObjPhoneFromCode($LostedDroneForm->verificationcode);
                     if ($phone != NULL){

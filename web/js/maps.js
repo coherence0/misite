@@ -49,7 +49,7 @@ ymaps.ready(function () {
         lostY.value = y;
         map.geoObjects.removeAll();
         map.geoObjects.add(new ymaps.Placemark([x,y], {
-            balloonContent: 'цвет <strong>Я потерял дрон здесь</strong>'
+            balloonContent: '<strong>Я потерял дрон здесь</strong>'
         }, {
             preset: 'islands#icon',
             iconColor: '#0095b6'
@@ -90,7 +90,7 @@ ymaps.ready(function () {
         lostY.value = y;
         map.geoObjects.removeAll();
         map.geoObjects.add(new ymaps.Placemark([x,y], {
-            balloonContent: 'цвет <strong>Я потерял дрон здесь</strong>'
+            balloonContent: '<strong>Я потерял дрон здесь</strong>'
         }, {
             preset: 'islands#icon',
             iconColor: '#0095b6'

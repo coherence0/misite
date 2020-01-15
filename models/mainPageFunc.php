@@ -77,7 +77,7 @@ class mainPageFunc
         $phone->status = 1;
         $phone->save();
         $config =[
-                   'fid' => $lostDron->id
+                   'lid' => $lostDron->id
                 ];
 		Yii::$app->queue->push(new LostDronsJob($config));
      	Yii::$app->session->addFlash('success','Дрон добавлен');
@@ -159,9 +159,9 @@ class mainPageFunc
     }  
 
     public static function getIdFromLostForm(&$form){
-        $id = getIdFromLostRegNumber($form->dron_reg_number);
-        if (idIsFind($id)) return $id;
-        $id = getIdFromLostSerialNumber($form->drond_serial_number);
+        $id = self::getIdFromLostRegNumber($form->dron_reg_number);
+        if (self::idIsFind($id)) return $id;
+        $id = self::getIdFromLostSerialNumber($form->drond_serial_number);
         return $id ? $id : null;
     }
 }
