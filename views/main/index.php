@@ -65,7 +65,7 @@ use yii\widgets\Pjax;
             <?= $FindForm->field($FindedDroneForm, 'verificationcode', ['enableAjaxValidation' => true])->label('Код из СМС') ?>
 
             <?= $FindForm->field($FindedDroneForm, 'date')->label('Дата')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Введите дату когды вы нашли дрон'],
+                'options' => ['placeholder' => 'Введите дату когда вы нашли дрон'],
                 'value' => '01/29/2014',
                 'language' => 'ru',
                 'type' => DatePicker::TYPE_COMPONENT_APPEND,
@@ -111,7 +111,7 @@ use yii\widgets\Pjax;
             <?= $LostForm->field($LostedDroneForm, 'verificationcode', ['enableAjaxValidation' => true])->label('Код из СМС') ?>
 
             <?= $LostForm->field($LostedDroneForm, 'date')->label('Дата')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Введите дату когды вы потеряли дрон'],
+                'options' => ['placeholder' => 'Введите дату когда вы потеряли дрон'],
                 'value' => '01/29/2014',
                 'language' => 'ru',
                 'type' => DatePicker::TYPE_COMPONENT_APPEND,

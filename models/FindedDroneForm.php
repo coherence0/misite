@@ -89,6 +89,6 @@ class FindedDroneForm extends Model
 
     public function validateSerialNumber($attribute, $param){
         if ($this->$attribute == '' && $this->drone_reg_number == '')
-            $this->addError($attribute, 'Необходимо внести либо учетный номер дрона либо серийный');
+            $this->addError($attribute, 'Необходимо внести либо учетный номер дрона либо серийный номер');
     }
 }
