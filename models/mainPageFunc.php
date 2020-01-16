@@ -148,7 +148,11 @@ class mainPageFunc
     }
 
     public static function idIsFind($id){
-        return $id ? false:true;
+        return $id ? true:false;
+    }
+
+    public static function phoneIsFind($id){
+        return $id ? true:false;
     }
 
     public static function getIdFromFindForm(&$form){

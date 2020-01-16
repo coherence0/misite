@@ -42,9 +42,9 @@ class MainController extends Controller
         if ($FindedDroneForm->load(Yii::$app->request->post()) && $FindedDroneForm->validate()){
             mainPageFunc::standardize($FindedDroneForm);
             $id = mainPageFunc::getIdFromFindForm($FindedDroneForm);
-            if (mainPageFunc::idIsFind($id)){
+            if (!mainPageFunc::idIsFind($id)){
                 $phone = mainPageFunc::getObjPhoneFromCode($FindedDroneForm->verificationcode);
-                    if ($phone != NULL){
+                    if (!phoneIsFind($phone)){
                         mainPageFunc::saveFindDron($FindedDroneForm,$phone);
                         return $this->goHome();
                     }    
@@ -55,9 +55,9 @@ class MainController extends Controller
         } elseif ($LostedDroneForm->load(Yii::$app->request->post()) && $LostedDroneForm->validate()){
             mainPageFunc::standardize($LostedDroneForm);
             $id = mainPageFunc::getIdFromLostForm(strtolower($LostedDroneForm->drone_reg_number));
-                if ($id == NULL){
+                if (!mainPageFunc::idIsFind($id)){
                 $phone = mainPageFunc::getObjPhoneFromCode($LostedDroneForm->verificationcode);
-                    if ($phone != NULL){
+                    if (!phoneIsFind($phone)){
                         mainPageFunc::saveLostDron($LostedDroneForm,$phone);
                         return $this->goHome();
                     }    
