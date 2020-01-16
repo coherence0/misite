@@ -40,7 +40,7 @@ class MainController extends Controller
 
 
         if ($FindedDroneForm->load(Yii::$app->request->post()) && $FindedDroneForm->validate()){
-            mainPageFunc::tolower($FindedDroneForm);
+            mainPageFunc::standardize($FindedDroneForm);
             $id = mainPageFunc::getIdFromFindForm($FindedDroneForm);
             if (mainPageFunc::idIsFind($id)){
                 $phone = mainPageFunc::getObjPhoneFromCode($FindedDroneForm->verificationcode);
@@ -53,7 +53,7 @@ class MainController extends Controller
                     return $this->goHome();
             }
         } elseif ($LostedDroneForm->load(Yii::$app->request->post()) && $LostedDroneForm->validate()){
-            mainPageFunc::tolower($LostedDroneForm);
+            mainPageFunc::standardize($LostedDroneForm);
             $id = mainPageFunc::getIdFromLostForm(strtolower($LostedDroneForm->drone_reg_number));
                 if ($id == NULL){
                 $phone = mainPageFunc::getObjPhoneFromCode($LostedDroneForm->verificationcode);
@@ -131,7 +131,13 @@ class MainController extends Controller
             ];
         }
     }
+
+
     // public function actionTest(){
+    //     $phone = '+7(924)-500-47-13';
+        
+    //     var_dump($phoneClear);
+    //     die;
     //     $pair = new Pairs();
     //     $finded = FindDrons::findOne(12);
     //     $losted = FindDrons::find()->all();

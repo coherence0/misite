@@ -37,25 +37,6 @@ ymaps.ready(function () {
         }))
         });
     }
-    function createSecondMap (state) {
-        map = new ymaps.Map('mapLost', state);
-
-        map.events.add('click', function (e) {
-    // Получение координат щелчка
-        var coords = e.get('coords');
-        var x = coords[0];
-        var y = coords[1];
-        lostX.value = x;
-        lostY.value = y;
-        map.geoObjects.removeAll();
-        map.geoObjects.add(new ymaps.Placemark([x,y], {
-            balloonContent: '<strong>Я потерял дрон здесь</strong>'
-        }, {
-            preset: 'islands#icon',
-            iconColor: '#0095b6'
-        }))
-        });
-    }
 });    
 })
 $('#lost').one('click',function(){

@@ -109,7 +109,7 @@ class mainPageFunc
 
 	public static function sendSMS($phone){
 		$config =[
-            'phone' => $phone,
+            'phone' => self::getTenMainNumbersFromPhone($phone),
 		];
         Yii::$app->queue->push(new SendSmsJob($config));
 	}
@@ -138,7 +138,7 @@ class mainPageFunc
 		return Phones::findOne(Phones::getIdFromPhone($phone));
 	}
 
-    public static function toLower(&$form){
+    public static function standardize(&$form){
         if (isset($form->drone_reg_number)){
             $form->drone_reg_number = strtolower($form->drone_reg_number);
         }
@@ -163,5 +163,17 @@ class mainPageFunc
         if (self::idIsFind($id)) return $id;
         $id = self::getIdFromLostSerialNumber($form->drond_serial_number);
         return $id ? $id : null;
+    }
+
+    public static function getTenMainNumbersFromPhone($phone){
+        $phoneClear='';
+        for ($i = strlen($phone); $i != -1; $i--){
+            if (array_key_exists($phone[$i], range(0,9))){
+                $phoneClear=$phone[$i].$phoneClear;
+            }
+            if (strlen($phoneClear)==10)
+                break;
+        }
+        return $phoneClear;
     }
 }
