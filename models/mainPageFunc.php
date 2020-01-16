@@ -56,6 +56,10 @@ class mainPageFunc
         $phone->varification_code = 0;
         $phone->status = 1;
         $phone->save();
+        $config =[
+                   'fid' => $findDron->id
+                ];
+        Yii::$app->queue->push(new FindDronsJob($config));
         Yii::$app->session->addFlash('success','Данные о дроне обновлены');
 	}
 
@@ -104,6 +108,10 @@ class mainPageFunc
         $phone->varification_code = 0;
         $phone->status = 1;
         $phone->save();
+        $config =[
+                   'lid' => $lostDron->id
+                ];
+        Yii::$app->queue->push(new LostDronsJob($config));
         Yii::$app->session->addFlash('success','Данные о дроне обновлены');
 	}
 
