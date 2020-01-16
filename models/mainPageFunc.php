@@ -151,21 +151,25 @@ class mainPageFunc
         return $id ? true:false;
     }
 
-    public static function phoneIsFind($id){
-        return $id ? true:false;
+    public static function phoneIsFind($phone){
+        return $phone ? true:false;
     }
 
     public static function getIdFromFindForm(&$form){
-        $id = self::getIdFromFindRegNumber($form->drone_reg_number);
+        if ($form->drone_reg_number!='')
+            $id = self::getIdFromFindRegNumber($form->drone_reg_number);
         if (self::idIsFind($id)) return $id;
-        $id = self::getIdFromFindSerialNumber($form->drone_serial_number);
+        if ($form->drone_serial_number != '')
+            $id = self::getIdFromFindSerialNumber($form->drone_serial_number);
         return $id ? $id : null;
     }  
 
     public static function getIdFromLostForm(&$form){
-        $id = self::getIdFromLostRegNumber($form->dron_reg_number);
+        if ($form->drone_reg_number!='')
+            $id = self::getIdFromLostRegNumber($form->dron_reg_number);
         if (self::idIsFind($id)) return $id;
-        $id = self::getIdFromLostSerialNumber($form->drond_serial_number);
+        if ($form->drone_serial_number != '')
+            $id = self::getIdFromLostSerialNumber($form->drond_serial_number);
         return $id ? $id : null;
     }
 
