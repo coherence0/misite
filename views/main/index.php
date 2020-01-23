@@ -53,7 +53,7 @@ use yii\widgets\Pjax;
 
             <?= $FindForm->field($FindedDroneForm, 'thirdname')->label('Отчество') ?>
 
-            <?= $FindForm->field($FindedDroneForm, 'drone_reg_number', ['enableAjaxValidation' => true])->label('Учетный номер дрона') ?>
+            <?= $FindForm->field($FindedDroneForm, 'drone_reg_number', ['enableAjaxValidation' => true,'labelOptions'=>['data-toggle'=>'tooltip', 'title'=>'Кликните для подсказки', 'data-placement'=>'right', 'id'=>'drone_reg_number_input']])->label('Учетный номер дрона') ?>
 
             <?= $FindForm->field($FindedDroneForm, 'dron')->label('Марка найденного дрона')->dropDownList($items, $params) ?>
 
@@ -78,18 +78,18 @@ use yii\widgets\Pjax;
 
             ]); ?>
 
-            <?= $FindForm->field($FindedDroneForm, 'iAgree')->checkbox()->label('ЧЕКБОКСы') ?>
+            <?= $FindForm->field($FindedDroneForm, 'iAgree')->checkbox()->label('ЧЕКБОКСы') ?>d
             <div class="box__item__footer">
                 <div id="mapFind"></div>
 
                 <?= Html::submitButton('Подтвердить', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
-            <?php echo 'Testing for ' . Html::tag('span', 'tooltip', [
-            'title'=>'This is a test tooltip',
-            'data-toggle'=>'tooltip',
-            'style'=>'text-decoration: underline; cursor:pointer;'
-            ]);?>
+            <?php //echo 'Testing for ' . Html::tag('span', 'tooltip', [
+            //'title'=>'This is a test tooltip',
+            //'data-toggle'=>'tooltip',
+            //'style'=>'text-decoration: underline; cursor:pointer;'
+            //]);?>
         </div>
         <div class="box__item hidden" id="lost_form">
 
@@ -161,3 +161,22 @@ use yii\widgets\Pjax;
         </div>
   </div>
 </footer>
+<!-- Dron reg Modal -->
+<div class="modal fade" id="regNumberModel" tabindex="-1" role="dialog" aria-labelledby="regNumberModelCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regNumberModelLongTitle">Где найти регистрационный номер дрона?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        А его не найти(
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,7 +29,8 @@ class AppAsset extends AssetBundle
         'js/loadMaps.js',
         'js/lost_and_find_drons/scripts.js',
         'js/confirmPhone.js',
-        'js/toolTip.js'
+        'js/toolTip.js',
+        'js/modalInfo.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
