@@ -19,7 +19,9 @@ class LostDronsJob extends BaseObject implements \yii\queue\JobInterface
     {
         $losted = LostDrons::findOne($this->lid);
         $finded = FindDrons::find()->all();
-
+        $title = 'Ваш дрон добавлен в базу';
+        $body = 'Мы добавили ваш дрон в базу';
+        funcForJobs::sendEmail($finded->email, $title, $body);
         foreach ($finded as $key) {
             $result = funcForJobs::getСomparison($losted,$key);
             if ($result['status']){

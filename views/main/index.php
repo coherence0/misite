@@ -85,6 +85,11 @@ use yii\widgets\Pjax;
                 <?= Html::submitButton('Подтвердить', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
+            <?php echo 'Testing for ' . Html::tag('span', 'tooltip', [
+            'title'=>'This is a test tooltip',
+            'data-toggle'=>'tooltip',
+            'style'=>'text-decoration: underline; cursor:pointer;'
+            ]);?>
         </div>
         <div class="box__item hidden" id="lost_form">
 

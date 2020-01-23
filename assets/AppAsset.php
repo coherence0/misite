@@ -26,9 +26,10 @@ class AppAsset extends AssetBundle
         'css/lost_and_find_drons/animation.css'
     ];
     public $js = [
-        'js/maps.js',
+        'js/loadMaps.js',
         'js/lost_and_find_drons/scripts.js',
-        'js/confirmPhone.js'
+        'js/confirmPhone.js',
+        'js/toolTip.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

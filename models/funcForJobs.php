@@ -92,7 +92,7 @@ class funcForJobs
 	public static function sendEmail($to, $title, $body){
 		Yii::$app->mailer->compose()
                 	    ->setTo($to)
-                    	->setFrom(["tdlyatesta@yandex.ru"=>'ya'])
+                    	->setFrom(["tdlyatesta@yandex.ru"=>'FindDrone'])
                     	->setSubject($title)
                     	->setTextBody($body)
                     	->send();
