@@ -79,12 +79,12 @@ use yii\widgets\Pjax;
 
             ]); ?>
 
-            
+
             <div class="box__item__footer">
                 <div id="mapFind"></div>
 
 
-                <?= $FindForm->field($FindedDroneForm, 'iAgree')->checkbox()->label('Я соглашаюсь, что мои данные будут переданы человеку, чей дрон я нашел.') ?>
+                <?= $FindForm->field($FindedDroneForm, 'iAgree')->checkbox()->label('Я согласен с обработкой персональных данных.') ?>
                 <p id="userReq">Подробнее...</p>
                 <?= Html::submitButton('Подтвердить', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
             </div>
@@ -132,10 +132,10 @@ use yii\widgets\Pjax;
                 ]
 
             ]); ?>
-            
+
             <din class="box__item__footer">
                 <div id="mapLost"></div>
-                <?= $LostForm->field($LostedDroneForm, 'iAgree')->checkbox()->label('Я соглашаюсь, что мои данные будут переданы человеку, чей дрон я нашел.') ?>
+                <?= $LostForm->field($LostedDroneForm, 'iAgree')->checkbox()->label('Я согласен с обработкой персональных данных.') ?>
                 <p id="userRe">Подробнее...</p>
                 <?= Html::submitButton('Подтвердить', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
             </din>
@@ -157,69 +157,69 @@ use yii\widgets\Pjax;
         </div>
         <div class="col right">
             <div class="pull-right">
-                <a class="fab fa-vk fa-2x"  href="https://vk.com/club54998404" style="text-decoration: none;"></a>
-                <a class="fab fa-twitter fa-2x"  href="https://twitter.com/ATM_Corporation" style="text-decoration: none;"></a>
-                <a class="fab fa-facebook-f fa-2x"  href="https://www.facebook.com/gkorvd" style="text-decoration: none;"></a>
-                <a class="fab fa-youtube fa-2x"  href="https://www.youtube.com/user/gkovd/" style="text-decoration: none;"></a>
-                <a class="fab fa-instagram fa-2x"  href="https://www.instagram.com/gkovd/" style="text-decoration: none;"></a>
+                <a class="fab fa-vk fa-2x" href="https://vk.com/club54998404" style="text-decoration: none;"></a>
+                <a class="fab fa-twitter fa-2x" href="https://twitter.com/ATM_Corporation" style="text-decoration: none;"></a>
+                <a class="fab fa-facebook-f fa-2x" href="https://www.facebook.com/gkorvd" style="text-decoration: none;"></a>
+                <a class="fab fa-youtube fa-2x" href="https://www.youtube.com/user/gkovd/" style="text-decoration: none;"></a>
+                <a class="fab fa-instagram fa-2x" href="https://www.instagram.com/gkovd/" style="text-decoration: none;"></a>
             </div>
         </div>
-  </div>
+    </div>
 </footer>
 <!-- Dron reg Modal -->
 <div class="modal fade" id="regNumberModel" tabindex="-1" role="dialog" aria-labelledby="regNumberModelCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="regNumberModelLongTitle">Где найти регистрационный номер дрона?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        А его не найти(
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regNumberModelLongTitle">Где найти регистрационный номер дрона?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                А его не найти(
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="modal fade" id="regSerialModel" tabindex="-1" role="dialog" aria-labelledby="regSerialModelCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="regSerialModelLongTitle">Где найти серийный номер дрона?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        А его не найти(
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regSerialModelLongTitle">Где найти серийный номер дрона?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                А его не найти(
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="modal fade" id="userR" tabindex="-1" role="dialog" aria-labelledby="regSerialModelCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="regSerialModelLongTitle">Тут что то будет?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Или нет(
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regSerialModelLongTitle">Тут что то будет?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Или нет(
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
