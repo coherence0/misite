@@ -5,6 +5,8 @@ use app\models\FindDrons;
 use app\models\LostDrons;
 use app\models\Phones;
 use app\models\SendSmsJob;
+use app\models\PhonesHistory;
+use app\models\funcForJobs;
 
 namespace app\models;
 use Yii;
@@ -191,5 +193,17 @@ class mainPageFunc
                 break;
         }
         return $phoneClear;
+    }
+
+    public static function isSpam($phone){
+        $count = PhonesHistory::getCountRecentRequests(self::getTenMainNumbersFromPhone($phone));
+        return ($count > 4) ? true : false;
+    }
+
+    public static function addPhoneToHistory($phone){
+        $record = new PhonesHistory;
+        $record->phone = self::getTenMainNumbersFromPhone($phone);
+        $record->time = time();
+        $record->save();
     }
 }

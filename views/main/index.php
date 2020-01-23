@@ -31,7 +31,7 @@ use yii\widgets\Pjax;
                 'options' => ['class' => ' hidden'],
             ]); ?>
 
-            <?= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон') ?>
+            <?= $findPhoneForm->field($PhoneForm, 'phone')->label('Телефон')?>
 
             <?= Html::submitButton('Подтвердить', ['class' => 'btn red__bg', 'name' => 'approve-button', 'id' => 'phoneConfirmBtn']) ?>
 

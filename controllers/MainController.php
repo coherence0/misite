@@ -13,15 +13,15 @@ use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\bootstrap4\ActiveForm;
 use app\models\Pairs;
+use app\models\PhonesHistory;
 use app\models\mainPageFunc;
 
 class MainController extends Controller
 {
-    public function actionIndex(){                                 
+    public function actionIndex(){                              
     	$FindedDroneForm = new FindedDroneForm();
         $LostedDroneForm = new LostedDroneForm();
         $PhoneForm = new PhoneForm();
-
         $drons = Drons::find()->all();
         $items = ArrayHelper::map($drons, 'id', 'model');
         $params = [
@@ -91,6 +91,9 @@ class MainController extends Controller
 
         $PhoneForm = new PhoneForm();
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+
+
         // Если пришёл AJAX запрос
         if (Yii::$app->request->isAjax) { 
             $data = Yii::$app->request->post();
@@ -98,6 +101,12 @@ class MainController extends Controller
             // Получаем данные модели из запроса
             if ($PhoneForm->load($data) && $PhoneForm->validate()) 
             {
+                if (mainPageFunc::isSpam('89245004713')){
+                    return [
+                        "data"=>null,
+                        "error"=>"Слишком много запросов на сегодня. (максимум 5)"
+                    ];
+                }
                 //Если всё успешно, отправляем ответ с данными
                 $phone = mainPageFunc::getObjPhoneFromPhone($PhoneForm->phone);
                 if(!$phone){

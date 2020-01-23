@@ -30,6 +30,7 @@ class SendSmsJob extends BaseObject implements \yii\queue\JobInterface
 			$data->text = $phone->varification_code;
 			$sms = $smsru->send_one($data);
             $phone->save();
+            mainPageFunc::addPhoneToHistory($PhoneForm->phone);
     	}else {
             $phoneInfo->varification_code = mt_rand(10000,99999);
     		$phoneInfo->created_at = time();
@@ -39,6 +40,7 @@ class SendSmsJob extends BaseObject implements \yii\queue\JobInterface
             $data->text = $phoneInfo->varification_code;
             $sms = $smsru->send_one($data);
             $phoneInfo->save();
+            mainPageFunc::addPhoneToHistory($PhoneForm->phone);
     	}
     }
 }
