@@ -145,12 +145,14 @@ use yii\widgets\Pjax;
         <div class="col ">
             <p class="pull-left">&copy; FindDrone <?= date('Y') ?></p>
         </div>
-        <div class="col">
-            <a class="fab fa-vk"  href="https://vk.com/club54998404" style="font-size: 2.5em;text-decoration: none;"></a>
-            <a class="fab fa-twitter"  href="https://twitter.com/ATM_Corporation" style="font-size: 2.5em;text-decoration: none;"></a>
-            <a class="fab fa-facebook-f"  href="https://www.facebook.com/gkorvd" style="font-size: 2.5em;text-decoration: none;"></a>
-            <a class="fab fa-youtube"  href="https://www.youtube.com/user/gkovd/" style="font-size: 2.5em;text-decoration: none;"></a>
-            <a class="fab fa-instagram"  href="https://www.instagram.com/gkovd/" style="font-size: 2.5em;text-decoration: none;"></a>
+        <div class="col right">
+            <div class="pull-right">
+                <a class="fab fa-vk fa-2x"  href="https://vk.com/club54998404" style="text-decoration: none;"></a>
+                <a class="fab fa-twitter fa-2x"  href="https://twitter.com/ATM_Corporation" style="text-decoration: none;"></a>
+                <a class="fab fa-facebook-f fa-2x"  href="https://www.facebook.com/gkorvd" style="text-decoration: none;"></a>
+                <a class="fab fa-youtube fa-2x"  href="https://www.youtube.com/user/gkovd/" style="text-decoration: none;"></a>
+                <a class="fab fa-instagram fa-2x"  href="https://www.instagram.com/gkovd/" style="text-decoration: none;"></a>
+            </div>
         </div>
   </div>
 </footer>
