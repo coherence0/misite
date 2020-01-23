@@ -25,6 +25,7 @@ class mainPageFunc
         $findDron->x_coords = $form->xCoords;
         $findDron->y_coords = $form->yCoords;
         $findDron->created_at = time();
+        $findDron->status = 1;
         $findDron->save();
         $phone->uid = $findDron->id;
         $phone->varification_code = 0;
@@ -53,6 +54,7 @@ class mainPageFunc
         $findDron->x_coords = $form->xCoords;
         $findDron->y_coords = $form->yCoords;
         $findDron->created_at = time();
+        $findDron->status = 1;
         $findDron->save();
         $phone->uid = $findDron->id;
         $phone->varification_code = 0;
@@ -76,7 +78,8 @@ class mainPageFunc
         $lostDron->date = $form->date;
         $lostDron->x_coords = $form->xCoords;
         $lostDron->y_coords = $form->yCoords;
-        $lostDron->created_at = time();
+        $lostDron->created_at = time(); 
+        $lostDron->status = 1;
         $lostDron->save();
         $phone->uid = $lostDron->id;
         $phone->varification_code = 0;
@@ -105,6 +108,7 @@ class mainPageFunc
         $lostDron->x_coords = $form->xCoords;
         $lostDron->y_coords = $form->yCoords;
         $lostDron->created_at = time();
+        $lostDron->status = 1;
         $lostDron->save();
         $phone->uid = $lostDron->id;
         $phone->varification_code = 0;

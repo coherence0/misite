@@ -43,6 +43,7 @@ use yii\widgets\Pjax;
             <?php $FindForm = ActiveForm::begin([
                 'options' => ['id' => 'findedDroneForm'],
                 'fieldConfig' => ['options' => ['class' => 'form__field']],
+                'validateOnChange'=>'true'
             ]); ?>
 
             <?= $FindForm->field($FindedDroneForm, 'xCoords')->hiddenInput(['value' => '0', 'id' => 'findX'],)->label(false) ?>
@@ -57,7 +58,7 @@ use yii\widgets\Pjax;
 
             <?= $FindForm->field($FindedDroneForm, 'dron')->label('Марка найденного дрона')->dropDownList($items, $params) ?>
 
-            <?= $FindForm->field($FindedDroneForm, 'drone_serial_number', ['enableAjaxValidation' => true])->label('Серийный номер дрона') ?>
+            <?= $FindForm->field($FindedDroneForm, 'drone_serial_number', ['enableAjaxValidation' => true, 'labelOptions'=>['data-toggle'=>'tooltip', 'title'=>'Кликните для подсказки', 'data-placement'=>'right', 'id'=>'drone_serial_number_input']])->label('Серийный номер дрона') ?>
 
 
             <?= $FindForm->field($FindedDroneForm, 'email')->label('E-mail')->input('email') ?>
@@ -78,10 +79,13 @@ use yii\widgets\Pjax;
 
             ]); ?>
 
-            <?= $FindForm->field($FindedDroneForm, 'iAgree')->checkbox()->label('ЧЕКБОКСы') ?>d
+            
             <div class="box__item__footer">
                 <div id="mapFind"></div>
 
+
+                <?= $FindForm->field($FindedDroneForm, 'iAgree')->checkbox()->label('Я соглашаюсь, что мои данные будут переданы человеку, чей дрон я нашел.') ?>
+                <p id="userReq">Подробнее...</p>
                 <?= Html::submitButton('Подтвердить', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
@@ -106,11 +110,11 @@ use yii\widgets\Pjax;
 
             <?= $LostForm->field($LostedDroneForm, 'thirdname')->label('Отчество') ?>
 
-            <?= $LostForm->field($LostedDroneForm, 'drone_reg_number', ['enableAjaxValidation' => true])->label('Учетный номер дрона') ?>
+            <?= $LostForm->field($LostedDroneForm, 'drone_reg_number', ['enableAjaxValidation' => true, 'labelOptions'=>['data-toggle'=>'tooltip', 'title'=>'Кликните для подсказки', 'data-placement'=>'right', 'id'=>'drone_lost_reg_number_input']])->label('Учетный номер дрона') ?>
 
             <?= $LostForm->field($LostedDroneForm, 'dron')->label('Марка найденного дрона')->dropDownList($items, $params) ?>
 
-            <?= $LostForm->field($LostedDroneForm, 'drone_serial_number', ['enableAjaxValidation' => true])->label('Серийный номер дрона') ?>
+            <?= $LostForm->field($LostedDroneForm, 'drone_serial_number', ['enableAjaxValidation' => true,'labelOptions'=>['data-toggle'=>'tooltip', 'title'=>'Кликните для подсказки', 'data-placement'=>'right', 'id'=>'drone_lost_serial_number_input']])->label('Серийный номер дрона') ?>
             <?= $LostForm->field($LostedDroneForm, 'email')->label('E-mail')->input('email') ?>
 
             <?= $LostForm->field($LostedDroneForm, 'verificationcode', ['enableAjaxValidation' => true])->label('Код из СМС') ?>
@@ -128,10 +132,11 @@ use yii\widgets\Pjax;
                 ]
 
             ]); ?>
-
+            
             <din class="box__item__footer">
                 <div id="mapLost"></div>
-
+                <?= $LostForm->field($LostedDroneForm, 'iAgree')->checkbox()->label('Я соглашаюсь, что мои данные будут переданы человеку, чей дрон я нашел.') ?>
+                <p id="userRe">Подробнее...</p>
                 <?= Html::submitButton('Подтвердить', ['class' => 'btn box__button red__bg', 'name' => 'login-button']) ?>
             </din>
             <?php ActiveForm::end(); ?>
@@ -173,6 +178,44 @@ use yii\widgets\Pjax;
       </div>
       <div class="modal-body">
         А его не найти(
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="regSerialModel" tabindex="-1" role="dialog" aria-labelledby="regSerialModelCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regSerialModelLongTitle">Где найти серийный номер дрона?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        А его не найти(
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="userR" tabindex="-1" role="dialog" aria-labelledby="regSerialModelCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regSerialModelLongTitle">Тут что то будет?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Или нет(
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

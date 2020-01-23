@@ -18,12 +18,13 @@ class LostedDroneForm extends Model
     public $date;
     public $xCoords;
     public $yCoords;
+    public $iAgree = false;
 
     public function rules()
     {//Sdelat' trim
         return [
             //[['id', 'email'], 'required'],
-            [['id','name_surname','thirdname','dron','drone_reg_number','drone_serial_number','email','verificationcode','date','xCoords','yCoords'],'trim'],
+            [['id','name_surname','thirdname','dron','drone_reg_number','drone_serial_number','email','verificationcode','date','xCoords','yCoords', 'iAgree'],'trim'],
 
             ['name_surname','required','message'=>'Пожалуйста введите Имя'],
             ['thirdname', 'default'],
@@ -44,6 +45,10 @@ class LostedDroneForm extends Model
                 'format'=>'php:Y-m-d',
             ],
 
+            ['iAgree', 'required'],
+            ['iAgree', 'boolean'],
+
+            ['iAgree', 'compare', 'compareValue' => 1, 'message'=>'Необходимо ваше подтверждение'],
 
             //['name', 'string', 'length', 'max',=> 15,'message'=>'Имя должно быть не длинее 15 символов'],
 

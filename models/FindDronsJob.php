@@ -22,14 +22,24 @@ class FindDronsJob extends BaseObject implements \yii\queue\JobInterface
         funcForJobs::sendEmail($finded->email, $title, $body);
         $losted = LostDrons::find()->all();
         foreach ($losted as $key) {
+            if ($key->status == 0 )
+                continue;
             $result = funcForJobs::getСomparison($finded,$key);
             if ($result['status']){
                 if ($result['differences'] == 0){
                     funcForJobs::sendEmail($key->email, 'Ваш дрон найден!', "Его нашел ".$finded->name_surname);
                     funcForJobs::setPair($key->id, $this->fid, 0, $result['distance']);
+                    $key->status = 0;
+                    $key->save();
+                    $finded->status =0;
+                    $finded->save();
                 }elseif ($result['differences'] == 1 && $result['distance'] <= FIND_RADIUS) {
                     funcForJobs::sendEmail($key->email, 'Возможно ваш дрон найден!', "Его нашел ".$finded->name_surname);
                     funcForJobs::setPair($key->id, $this->fid, 1, $result['distance']);
+                    $key->status = 0;
+                    $key->save();
+                    $finded->status = 0;
+                    $finded->save();
                 }
             }
         }
