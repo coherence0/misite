@@ -73,7 +73,6 @@ ymaps.ready(function() {
                 }))
             });
         } else {
-            console.log('hi');
             setTimeout(function() {
                 boundsFind = coords.geoObjects.get(0).properties.get('boundedBy');
                 mapFind.setBounds(boundsFind);
@@ -101,7 +100,6 @@ ymaps.ready(function() {
                 }))
             });
         } else {
-            console.log('hi');
             setTimeout(function() {
                 boundsLost = coords.geoObjects.get(0).properties.get('boundedBy');
                 mapLost.setBounds(boundsLost);
