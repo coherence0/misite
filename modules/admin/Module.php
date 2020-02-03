@@ -1,8 +1,8 @@
 <?php
 
 namespace app\modules\admin;
+use yiil
 use yii\filters\AccessControl;
-use Yii;
 /**
  * admin module definition class
  */
