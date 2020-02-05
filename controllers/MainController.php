@@ -5,16 +5,16 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\Url;
-use app\models\FindedDroneForm;
-use app\models\LostedDroneForm;
-use app\models\PhoneForm;
+use app\models\forms\FindedDroneForm;
+use app\models\forms\LostedDroneForm;
+use app\models\forms\PhoneForm;
 use app\models\Drons;
 use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use yii\bootstrap4\ActiveForm;
 use app\models\Pairs;
 use app\models\PhonesHistory;
-use app\models\mainPageFunc;
+use app\models\helpModules\mainPageFunc;
 
 class MainController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace app\models;
+namespace app\models\jobs;
 
 use Yii;
 use yii\base\BaseObject;
 use app\models\LostDrons;
 use app\models\FindDrons;
-use app\models\funcForJobs;
+use app\models\helpForms\funcForJobs;
 define('FIND_RADIUS', 5000);
 
 class FindDronsJob extends BaseObject implements \yii\queue\JobInterface

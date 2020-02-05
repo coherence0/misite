@@ -1,14 +1,19 @@
 <?php
 
 //use Yii;
+
+namespace app\models\helpModules;
 use app\models\FindDrons;
 use app\models\LostDrons;
 use app\models\Phones;
-use app\models\SendSmsJob;
+use app\models\jobs\SendSmsJob;
 use app\models\PhonesHistory;
-use app\models\funcForJobs;
+use app\models\jobs\FindDronsJob;
+use app\models\jobs\LostDronsJob;
+use app\models\helpModules\funcForJobs;
 
-namespace app\models;
+
+
 use Yii;
 class mainPageFunc 
 {
